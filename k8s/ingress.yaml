@@ -6,7 +6,7 @@ metadata:
 spec:
   ingressClassName: public
   rules:
-  - host: your-frontend-domain.com  
+  - host: localhost
     http:
       paths:
       - path: /
