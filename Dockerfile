@@ -10,7 +10,7 @@ RUN npm run build --prod
 
 # Etapa de despliegue
 FROM nginx:alpine
-COPY --from=build /app/dist/tu-nombre-de-proyecto /usr/share/nginx/html
+COPY --from=build /app/dist/ArriendaFront /usr/share/nginx/html
 
 # Expone el puerto 80 para el servidor Nginx
 EXPOSE 80
