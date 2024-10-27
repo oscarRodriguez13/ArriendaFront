@@ -11,7 +11,9 @@ RUN npm run build --prod
 # Etapa de despliegue
 FROM nginx:alpine
 # Cambia la ruta de la copia para que se ajuste a donde se genera el index.html
-COPY --from=build /app/dist/arrienda-front/browser /usr/share/nginx/html
+COPY /dist/arrienda-front /usr/share/nginx/html
+
+COPY ./nginx-custom.conf /etc/nginx/conf.d/default.conf
 
 # Expone el puerto 80 para el servidor Nginx
 EXPOSE 80
