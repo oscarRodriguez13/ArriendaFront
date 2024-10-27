@@ -1,5 +1,5 @@
 {
-  "name": "arrienda-tu-finca-front",
+  "name": "arrienda-front",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:ArriendaTuFincaFront": "node dist/arrienda-tu-finca-front/server/server.mjs"
+    "serve:ssr:ArriendaTuFincaFront": "node dist/arrienda-front/server/server.mjs"
   },
   "private": true,
   "dependencies": {
