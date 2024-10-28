@@ -17,6 +17,8 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-button class="editar-btn" (click)="editarPropiedad(propiedad.id ?? 0)">Editar propiedad</button>
+      <button mat-button class="desactivar-btn" (click)="desactivarPropiedad(propiedad.id ?? 0)">Desactivar
+        propiedad</button>
     </mat-card-actions>
   </mat-card>
   <div *ngIf="propiedades.length === 0">No se encontraron propiedades.</div>

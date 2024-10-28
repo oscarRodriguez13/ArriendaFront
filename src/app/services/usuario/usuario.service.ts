@@ -14,7 +14,7 @@ export class UsuarioService {
   constructor() { }
 
   crearUsuario(usuario: Usuario): Promise<Usuario> {
-    return axios.post<Usuario>('http://127.0.0.1/api/usuarios', usuario)
+    return axios.post<Usuario>('http://localhost:8082/api/usuarios', usuario)
       .then(response => {
         this.setUsuarioActual(response.data);
         return response.data;
@@ -22,13 +22,13 @@ export class UsuarioService {
   }
 
   checkCorreo(correo: string): Promise<Usuario | null> {
-    return axios.get<Usuario>('http://127.0.0.1/api/usuarios/checkMail/' + correo)
+    return axios.get<Usuario>('http://localhost:8082/api/usuarios/checkMail/' + correo)
       .then(response => response.data)
       .catch(() => null);
   }
 
   checkContrasenia(correo: string, contrasenia: string): Promise<Usuario | null> {
-    return axios.get<Usuario>('http://127.0.0.1/api/usuarios/checkPassword/' + contrasenia + '/' + correo)
+    return axios.get<Usuario>('http://localhost:8082/api/usuarios/checkPassword/' + contrasenia + '/' + correo)
       .then(response => {
         if (response.data) {
           this.setUsuarioActual(response.data);
@@ -52,7 +52,7 @@ export class UsuarioService {
             this.usuarioActual = JSON.parse(storedUsuario);
           } catch (error) {
             console.error("Error al parsear el usuario desde localStorage:", error);
-            this.usuarioActual = null; 
+            this.usuarioActual = null;
           }
         }
       }
@@ -71,7 +71,7 @@ export class UsuarioService {
         return response.data;
       });
   }
-  
+
 
   logout() {
     this.usuarioActual = null;

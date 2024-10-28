@@ -16,7 +16,9 @@ export class Propiedad {
         public aceptaMascotas?: boolean | null,
         public tienePiscina?: boolean | null,
         public tieneAsador?: boolean | null,
-        public valorNoche?: number | null
+        public valorNoche?: number | null,
+        public status?: number | null
+
     ) { }
 }
 

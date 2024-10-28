@@ -56,6 +56,20 @@ export class MisPropiedadesComponent implements OnInit {
     }
   }
 
+  // Método para desactivar la propiedad
+  desactivarPropiedad(propiedadId: number): void {
+    this.propiedadUsuarioService.desactivarPropiedad(propiedadId).subscribe({
+      next: () => {
+        this.mensaje = 'Propiedad desactivada correctamente';
+        this.getPropiedadesPorId(); // Refresca la lista de propiedades
+      },
+      error: (err) => {
+        console.error('Error al desactivar la propiedad', err);
+        this.mensaje = `Error al desactivar la propiedad: ${err.message || err.toString()}`;
+      }
+    });
+  }
+
   editarPropiedad(propiedadId: number): void {
     this.router.navigate(['/editar-propiedad', propiedadId]);
   }
