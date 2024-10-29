@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Alquiler } from '../../models/Alquiler';
+import { Alquiler, EstadoAlquiler } from '../../models/Alquiler';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,11 @@ export class AlquilerService {
     return this.http.post<Alquiler>(this.baseUrl, alquiler);
   }
 
+
+  finalizarAlquiler(alquiler: Alquiler): Observable<Alquiler> {
+    const alquilerActualizado = { ...alquiler, estado: EstadoAlquiler.FINALIZADO };
+    return this.http.put<Alquiler>(`${this.baseUrl}/${alquiler.id}`, alquilerActualizado);
+  }
 
 
 }

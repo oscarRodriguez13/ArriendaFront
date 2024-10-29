@@ -81,10 +81,10 @@ export class SolicitarArriendoComponent implements OnInit {
       return;
     }
 
-    this.alquiler.fechaInicio = this.fechaInicio;
-    this.alquiler.fechaFin = this.fechaFin;
-    this.alquiler.estado = EstadoAlquiler.PENDIENTE;
-    this.alquiler.comentarios = '';
+  this.alquiler.fechaInicio = new Date(this.fechaInicio);
+  this.alquiler.fechaFin = new Date(this.fechaFin);
+  this.alquiler.estado = EstadoAlquiler.PENDIENTE;
+  this.alquiler.comentarios = '';
 
     // Primero, enviar la solicitud para crear el alquiler
     this.alquilerService.crearAlquiler(this.alquiler).subscribe({

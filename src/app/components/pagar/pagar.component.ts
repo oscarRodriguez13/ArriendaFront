@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { FormsModule } from '@angular/forms';
+import { PropiedadService } from '../../services/propiedad/propiedad.service';
 
 
 @Component({
@@ -20,6 +21,13 @@ import { FormsModule } from '@angular/forms';
 })
 export class PagarComponent implements OnInit {
   alquiler: Alquiler | null = null;
+  valorPago: number = 0;
+  banco: string = '';
+  numeroCuenta: string = '';
+  bancos: string[] = ['Bancolombia', 'Banco Agrario', 'Banco de Bogota']; 
+  
+  
+  // Propiedades para reseñas
   calificacionPropiedad: number = 0;
   comentarioPropiedad: string = '';
   calificacionPropietario: number = 0;
@@ -29,6 +37,7 @@ export class PagarComponent implements OnInit {
     private route: ActivatedRoute,
     private alquilerService: AlquilerService,
     private reseniaService: ReseniaService,
+    private propiedadService: PropiedadService,
     private router: Router
   ) {}
 
@@ -36,7 +45,10 @@ export class PagarComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.alquilerService.getAlquilerPorId(Number(id)).subscribe({
-        next: (alquiler) => (this.alquiler = alquiler),
+        next: (alquiler) => {
+          this.alquiler = alquiler;
+          this.valorPago = this.calcularTotal();
+        },
         error: () => console.error('Error al cargar el alquiler.')
       });
     }
@@ -50,6 +62,47 @@ export class PagarComponent implements OnInit {
     return 0;
   }
 
+  procesarPago(): void {
+    if (this.banco && this.numeroCuenta) {
+      console.log('Pago procesado:', {
+        valor: this.valorPago,
+        banco: this.banco,
+        numeroCuenta: this.numeroCuenta
+      });
+  
+      // Llamada para actualizar el estado del alquiler a FINALIZADO
+      if (this.alquiler && this.alquiler.propiedad && this.alquiler.propiedad.id !== null && this.alquiler.propiedad.id !== undefined) {
+
+        this.alquiler.propiedad.disponible = true;
+        this.propiedadService.putPropiedadPorID(this.alquiler.propiedad.id, this.alquiler.propiedad).subscribe({
+          next: () => {
+            console.log('Propiedad actualizada con éxito');
+          },
+          error: (error) => {
+            console.error('Error al actualizar la propiedad', error);
+          }
+        });
+        
+        this.alquilerService.finalizarAlquiler(this.alquiler).subscribe({
+          next: () => {
+            console.log('El estado del alquiler se ha actualizado a FINALIZADO');
+            alert(`Pago realizado por $${this.valorPago}. El estado del alquiler ha sido actualizado a FINALIZADO.`);
+            this.router.navigate(['/']); 
+          },
+          error: (err) => {
+            console.error('Error al actualizar el estado del alquiler', err);
+            alert("Hubo un error al finalizar el alquiler.");
+          }
+        });
+      }
+    } else {
+      alert("Por favor complete todos los datos de pago.");
+    }
+  }
+  
+
+
+  
   enviarReseniaPropiedad(): void {
     if (this.alquiler) {
       const reseniaPropiedad: Resenia = {
@@ -74,6 +127,7 @@ export class PagarComponent implements OnInit {
       });
     }
   }
+
 
   enviarReseniaPropietario(): void {
     if (this.alquiler?.usuarioAsignado?.id && this.alquiler?.propiedad?.propietario?.id) {
@@ -104,8 +158,5 @@ export class PagarComponent implements OnInit {
     }
   }
 
-  procesarPago(): void {
-    alert(`Pago realizado por $${this.calcularTotal()}`);
-    this.router.navigate(['/']);
-  }
+  
 }

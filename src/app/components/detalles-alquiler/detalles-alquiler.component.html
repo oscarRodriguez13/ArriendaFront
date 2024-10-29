@@ -3,7 +3,11 @@
 <div class="detalles-alquiler-container">
   <div class="header">
     <h1 class="titulo-detalles">Detalles del Alquiler</h1>
-    <button mat-button class="pagar-btn" [routerLink]="['/pagar', alquiler?.id]">Pagar</button>
+    <button *ngIf="mostrarBotonPagar()"
+        mat-button class="agregar-propiedad-btn"
+        [routerLink]="['/pagar', alquiler?.id]">
+  Pagar
+</button>
   </div>
 
   <div *ngIf="alquiler; else noDetalles">
