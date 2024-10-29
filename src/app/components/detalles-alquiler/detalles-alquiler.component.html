@@ -1,22 +1,28 @@
 <app-header></app-header>
 
-<div class="detalles-solicitud-container">
-  <h1 class="titulo-detalles">Detalles del Alquiler</h1>
-  
-  <div *ngIf="solicitud; else noDetalles">
-    <p><strong>Propiedad:</strong> {{ solicitud.propiedad.nombre }}</p>
-    <p><strong>Ciudad:</strong> {{ solicitud.propiedad.ciudad }}</p>
-    <p><strong>Área:</strong> {{ solicitud.propiedad.area }} m²</p>
-    <p><strong>Inquilino:</strong> {{ solicitud.usuarioAsignado.nombre }} {{ solicitud.usuarioAsignado.apellido }}</p>
-    <p><strong>Fecha Inicio:</strong> {{ solicitud.fechaInicio | date }}</p>
-    <p><strong>Fecha Fin:</strong> {{ solicitud.fechaFin | date }}</p>
-    <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
-    <p><strong>Comentarios:</strong> {{ solicitud.comentarios || 'No hay comentarios adicionales' }}</p>
-</div>
+<div class="detalles-alquiler-container">
+  <div class="header">
+    <h1 class="titulo-detalles">Detalles del Alquiler</h1>
+    <button mat-button class="pagar-btn" [routerLink]="['/pagar', alquiler?.id]">Pagar</button>
+  </div>
 
-<ng-template #noDetalles>
-  <p>{{ mensaje }}</p>
-</ng-template>
+  <div *ngIf="alquiler; else noDetalles">
+    <div class="detalle-card">
+      <p><strong>Propiedad:</strong> {{ alquiler.propiedad.nombre }}</p>
+      <p><strong>Valor Alquiler por noche:</strong> {{ alquiler.propiedad.valorNoche }}</p>
+      <p><strong>Ciudad:</strong> {{ alquiler.propiedad.ciudad }}</p>
+      <p><strong>Área:</strong> {{ alquiler.propiedad.area }} m²</p>
+      <p><strong>Inquilino:</strong> {{ alquiler.usuarioAsignado.nombre }} {{ alquiler.usuarioAsignado.apellido }}</p>
+      <p><strong>Fecha Inicio:</strong> {{ alquiler.fechaInicio | date }}</p>
+      <p><strong>Fecha Fin:</strong> {{ alquiler.fechaFin | date }}</p>
+      <p><strong>Estado:</strong> {{ alquiler.estado }}</p>
+      <p><strong>Comentarios:</strong> {{ alquiler.comentarios || 'No hay comentarios adicionales' }}</p>
+    </div>
+  </div>
+
+  <ng-template #noDetalles>
+    <p>{{ mensaje }}</p>
+  </ng-template>
 </div>
 
 <app-footer></app-footer>

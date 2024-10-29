@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { AlquilerListaComponent } from './components/alquiler-lista/alquiler-lista.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { BuscarComponent } from './components/buscar/buscar.component';
@@ -15,6 +14,7 @@ import { MisAlquileresComponent } from './components/mis-alquileres/mis-alquiler
 import { SolicitudesComponent } from './components/solicitudes/solicitudes.component';
 import { SolicitarArriendoComponent } from './components/solicitar-arriendo/solicitar-arriendo.component';
 import { AnadirPropiedadComponent } from './components/anadir-propiedad/anadir-propiedad.component';
+import { PagarComponent } from './components/pagar/pagar.component';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,7 @@ import { AnadirPropiedadComponent } from './components/anadir-propiedad/anadir-p
   
   imports: [RouterOutlet, RouterModule, RegistroComponent, BuscarComponent, LoginComponent, CommonModule, MisPropiedadesComponent, 
     MisAlquileresComponent, HeaderComponent, SolicitarArriendoComponent, MiPerfilComponent, EditarPerfilComponent, AnadirPropiedadComponent,
-     SolicitudesComponent, DetallesSolicitudComponent, DetallesAlquilerComponent], 
+     SolicitudesComponent, DetallesSolicitudComponent, DetallesAlquilerComponent, PagarComponent], 
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

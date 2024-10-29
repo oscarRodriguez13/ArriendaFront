@@ -15,4 +15,14 @@ export class ReseniaService {
     return this.http.get<Resenia[]>(`${this.apiUrl}/usuario?idUsuario=${idUsuario}`);
   }
 
+    // Crear una reseña para una propiedad
+    crearReseniaPropiedad(resenia: Resenia): Observable<Resenia> {
+      return this.http.post<Resenia>(`${this.apiUrl}/propiedad`, resenia);
+    }
+  
+    // Crear una reseña para un usuario (propietario)
+    crearReseniaPropietario(resenia: Resenia): Observable<Resenia> {
+      return this.http.post<Resenia>(`${this.apiUrl}/usuario`, resenia);
+    }
+
 }

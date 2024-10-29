@@ -6,15 +6,13 @@ import { Usuario } from '../../models/Usuario';
   providedIn: 'root'
 })
 export class UsuarioService {
-
-
-
   private usuarioActual: Usuario | null = null;
+  private apiUrl = 'http://127.0.0.1/api/usuarios'; 
 
-  constructor() { }
+  constructor() {}
 
   crearUsuario(usuario: Usuario): Promise<Usuario> {
-    return axios.post<Usuario>('http://127.0.0.1/api/usuarios', usuario)
+    return axios.post<Usuario>(`${this.apiUrl}`, usuario)
       .then(response => {
         this.setUsuarioActual(response.data);
         return response.data;
@@ -22,13 +20,13 @@ export class UsuarioService {
   }
 
   checkCorreo(correo: string): Promise<Usuario | null> {
-    return axios.get<Usuario>('http://127.0.0.1/api/usuarios/checkMail/' + correo)
+    return axios.get<Usuario>(`${this.apiUrl}/checkMail/${correo}`)
       .then(response => response.data)
       .catch(() => null);
   }
 
   checkContrasenia(correo: string, contrasenia: string): Promise<Usuario | null> {
-    return axios.get<Usuario>('http://127.0.0.1/api/usuarios/checkPassword/' + contrasenia + '/' + correo)
+    return axios.get<Usuario>(`${this.apiUrl}/checkPassword/${contrasenia}/${correo}`)
       .then(response => {
         if (response.data) {
           this.setUsuarioActual(response.data);
@@ -65,13 +63,12 @@ export class UsuarioService {
 
   updateUsuario(usuario: Usuario): Promise<Usuario> {
     console.log('Usuario a actualizar:', usuario);
-    return axios.put<Usuario>(`http://127.0.0.1/api/usuarios/${this.usuarioActual?.id}`, usuario)
+    return axios.put<Usuario>(`${this.apiUrl}/${this.usuarioActual?.id}`, usuario)
       .then(response => {
         this.setUsuarioActual(response.data);
         return response.data;
       });
   }
-  
 
   logout() {
     this.usuarioActual = null;

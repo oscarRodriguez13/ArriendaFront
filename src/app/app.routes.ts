@@ -4,7 +4,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { BuscarComponent } from './components/buscar/buscar.component';
 import { MisPropiedadesComponent } from './components/mispropiedades/mispropiedades.component';
-import { AlquilerListaComponent } from './components/alquiler-lista/alquiler-lista.component';
 import { MisAlquileresComponent } from './components/mis-alquileres/mis-alquileres.component';
 import { SolicitudesComponent } from './components/solicitudes/solicitudes.component';
 import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
@@ -17,6 +16,7 @@ import { DetallesSolicitudComponent } from './components/detalles-solicitud/deta
 import { AnadirPropiedadComponent } from './components/anadir-propiedad/anadir-propiedad.component';
 import { EditarPropiedadComponent } from './components/editar-propiedad/editar-propiedad.component';
 import { DetallesAlquilerComponent } from './components/detalles-alquiler/detalles-alquiler.component';
+import { PagarComponent } from './components/pagar/pagar.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -34,7 +34,9 @@ export const routes: Routes = [
     { path: 'solicitudes/:id', component: DetallesSolicitudComponent, canActivate: [AuthGuard] },
     { path: 'alquileres', component: MisAlquileresComponent, canActivate: [AuthGuard] },
     { path: 'alquileres/:id', component: DetallesAlquilerComponent, canActivate: [AuthGuard] },
+    { path: 'pagar/:id', component: PagarComponent, canActivate: [AuthGuard] },
     { path: 'anadir-propiedad', component: AnadirPropiedadComponent },
     { path: 'editar-propiedad/:id', component: EditarPropiedadComponent, canActivate: [AuthGuard] },
+    
 
 ];

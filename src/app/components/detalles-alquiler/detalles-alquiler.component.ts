@@ -5,17 +5,18 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { AlquilerService } from '../../services/alquiler/alquiler.service';
 import { Alquiler } from '../../models/Alquiler';
+import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detalles-alquiler',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, FooterComponent],
+  imports: [CommonModule, HeaderComponent, FooterComponent, RouterModule],
   templateUrl: './detalles-alquiler.component.html',
   styleUrl: './detalles-alquiler.component.css'
 })
 export class DetallesAlquilerComponent {
-  solicitud: Alquiler | null = null;
+  alquiler: Alquiler | null = null;
   mensaje: string = '';
 
   constructor(
@@ -32,8 +33,8 @@ export class DetallesAlquilerComponent {
 
   obtenerDetallesAlquiler(id: number): void {
     this.alquilerService.getAlquilerPorId(id).subscribe({
-      next: (solicitud) => {
-        this.solicitud = solicitud;
+      next: (alquiler) => {
+        this.alquiler = alquiler;
       },
       error: (err) => {
         console.error('Error al obtener los detalles del alquiler', err);

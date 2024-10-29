@@ -1,0 +1,81 @@
+<app-header></app-header>
+
+<div class="pago-container">
+  <h1 class="titulo-pago">Pagar Alquiler</h1>
+
+  <div *ngIf="alquiler; else noAlquiler">
+    <div class="detalle-pago">
+      <p><strong>Propiedad:</strong> {{ alquiler.propiedad.nombre }}</p>
+      <p><strong>Valor Alquiler Total:</strong> ${{ calcularTotal() }}</p>
+      <p><strong>Fecha Inicio:</strong> {{ alquiler.fechaInicio | date }}</p>
+      <p><strong>Fecha Fin:</strong> {{ alquiler.fechaFin | date }}</p>
+      <p><strong>Estado:</strong> {{ alquiler.estado }}</p>
+    </div>
+
+    <div class="contenido-dividido">
+      <!-- Reseña de Propiedad -->
+      <div class="formulario-resenias">
+        <h3>Reseña para la Propiedad</h3>
+        <form (ngSubmit)="enviarReseniaPropiedad()">
+          <div class="form-group">
+            <label for="calificacionPropiedad">Calificación:</label>
+            <input
+              type="number"
+              id="calificacionPropiedad"
+              [(ngModel)]="calificacionPropiedad"
+              name="calificacionPropiedad"
+              min="1"
+              max="5"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="comentarioPropiedad">Comentario:</label>
+            <textarea
+              id="comentarioPropiedad"
+              [(ngModel)]="comentarioPropiedad"
+              name="comentarioPropiedad"
+            ></textarea>
+          </div>
+          <button mat-button type="submit" class="enviar-btn">Enviar Reseña</button>
+        </form>
+      </div>
+
+      <!-- Reseña de Propietario -->
+      <div class="formulario-resenias">
+        <h3>Reseña para el Propietario</h3>
+        <form (ngSubmit)="enviarReseniaPropietario()">
+          <div class="form-group">
+            <label for="calificacionPropietario">Calificación:</label>
+            <input
+              type="number"
+              id="calificacionPropietario"
+              [(ngModel)]="calificacionPropietario"
+              name="calificacionPropietario"
+              min="1"
+              max="5"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="comentarioPropietario">Comentario:</label>
+            <textarea
+              id="comentarioPropietario"
+              [(ngModel)]="comentarioPropietario"
+              name="comentarioPropietario"
+            ></textarea>
+          </div>
+          <button mat-button type="submit" class="enviar-btn">Enviar Reseña</button>
+        </form>
+      </div>
+    </div>
+
+    <button mat-button class="pagar-btn" (click)="procesarPago()">Pagar Ahora</button>
+  </div>
+
+  <ng-template #noAlquiler>
+    <p>No se encontró el alquiler.</p>
+  </ng-template>
+</div>
+
+<app-footer></app-footer>

@@ -46,7 +46,7 @@ html, body {
   }
   
   .aplicar-btn {
-    background-color: #d9534f;
+    background-color: #4CAF50;
     color: white;
     border: none;
     padding: 8px 16px;
@@ -55,7 +55,7 @@ html, body {
   }
   
   .aplicar-btn:hover {
-    background-color: #c9302c;
+    background-color: #4CAF49;
   }
   
   .titulo-solicitudes {

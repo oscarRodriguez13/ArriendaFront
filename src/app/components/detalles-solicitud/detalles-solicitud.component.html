@@ -2,16 +2,20 @@
 
 <div class="detalles-solicitud-container">
   <h1 class="titulo-detalles">Detalles del Alquiler</h1>
-  
-  <div *ngIf="solicitud; else noDetalles">
-    <p><strong>Propiedad:</strong> {{ solicitud.propiedad.nombre }}</p>
-    <p><strong>Ciudad:</strong> {{ solicitud.propiedad.ciudad }}</p>
-    <p><strong>Área:</strong> {{ solicitud.propiedad.area }} m²</p>
-    <p><strong>Inquilino:</strong> {{ solicitud.usuarioAsignado.nombre }} {{ solicitud.usuarioAsignado.apellido }}</p>
-    <p><strong>Fecha Inicio:</strong> {{ solicitud.fechaInicio | date }}</p>
-    <p><strong>Fecha Fin:</strong> {{ solicitud.fechaFin | date }}</p>
-    <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
-    <p><strong>Comentarios:</strong> {{ solicitud.comentarios || 'No hay comentarios adicionales' }}</p>
+
+  <div class="contenido-dividido" *ngIf="solicitud; else noDetalles">
+    <div class="detalle-card">
+      <h3>Información de la Propiedad</h3>
+      <p><strong>Propiedad:</strong> {{ solicitud.propiedad.nombre }}</p>
+      <p><strong>Valor Alquiler por noche:</strong> {{ solicitud.propiedad.valorNoche }}</p>
+      <p><strong>Ciudad:</strong> {{ solicitud.propiedad.ciudad }}</p>
+      <p><strong>Área:</strong> {{ solicitud.propiedad.area }} m²</p>
+      <p><strong>Inquilino:</strong> {{ solicitud.usuarioAsignado.nombre }} {{ solicitud.usuarioAsignado.apellido }}</p>
+      <p><strong>Fecha Inicio:</strong> {{ solicitud.fechaInicio | date }}</p>
+      <p><strong>Fecha Fin:</strong> {{ solicitud.fechaFin | date }}</p>
+      <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
+      <p><strong>Comentarios:</strong> {{ solicitud.comentarios || 'No hay comentarios adicionales' }}</p>
+    </div>
 
     <div class="resenias-container">
       <h2>Reseñas del Inquilino</h2>
@@ -20,13 +24,14 @@
         <p><strong>Comentario:</strong> {{ resenia.comentario }}</p>
         <p><strong>Calificador:</strong> {{ resenia.usuarioCalificadorId.nombre }} {{ resenia.usuarioCalificadorId.apellido }}</p>
       </div>
-      <div *ngIf="resenias.length === 0">No hay reseñas disponibles para este inquilino.</div>
+      <div *ngIf="resenias.length === 0" class="no-resenias">
+        No hay reseñas disponibles para este inquilino.
+      </div>
     </div>
-    
   </div>
 
   <ng-template #noDetalles>
-    <p>{{ mensaje }}</p>
+    <p class="mensaje">{{ mensaje }}</p>
   </ng-template>
 </div>
 
