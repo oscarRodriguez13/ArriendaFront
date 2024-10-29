@@ -50,7 +50,7 @@ export class UsuarioService {
             this.usuarioActual = JSON.parse(storedUsuario);
           } catch (error) {
             console.error("Error al parsear el usuario desde localStorage:", error);
-            this.usuarioActual = null; 
+            this.usuarioActual = null;
           }
         }
       }
@@ -69,6 +69,7 @@ export class UsuarioService {
         return response.data;
       });
   }
+
 
   logout() {
     this.usuarioActual = null;

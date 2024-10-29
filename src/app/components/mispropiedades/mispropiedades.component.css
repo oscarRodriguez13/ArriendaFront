@@ -67,3 +67,15 @@
   margin-right: 20px;
   padding: 10px 20px;
 }
+
+.desactivar-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: 10px 20px;
+}

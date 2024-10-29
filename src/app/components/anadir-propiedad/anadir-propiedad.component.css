@@ -95,3 +95,7 @@ p {
     font-size: 14px;
     grid-column: span 2;
 }
+
+form div:nth-child(2n) {
+    margin-right: 20px;
+}

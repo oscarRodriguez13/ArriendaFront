@@ -8,14 +8,14 @@ import { Alquiler } from '../../models/Alquiler';
 })
 export class AlquilerService {
 
-  private baseUrl = 'http://127.0.0.1/api/alquileres'; 
+  private baseUrl = 'http://127.0.0.1/api/alquileres';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAlquileresPorUsuario(userId: number): Observable<Alquiler[]> {
     return this.http.get<Alquiler[]>(`${this.baseUrl}/usuario/${userId}`);
   }
-  
+
   getSolicitudesPorPropietario(propietarioId: number): Observable<Alquiler[]> {
     return this.http.get<Alquiler[]>(`${this.baseUrl}/usuario/${propietarioId}/solicitudes`);
   }
@@ -28,6 +28,6 @@ export class AlquilerService {
     return this.http.post<Alquiler>(this.baseUrl, alquiler);
   }
 
-  
-  
+
+
 }

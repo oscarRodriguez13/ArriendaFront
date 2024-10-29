@@ -33,5 +33,8 @@ export class PropiedadService {
     return this.http.get<Propiedad>(`${this.apiUrl}/${propiedadId}`);
   }
 
+  desactivarPropiedad(propiedadId: number): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${propiedadId}/desactivar`, null);
+  }
 
 }

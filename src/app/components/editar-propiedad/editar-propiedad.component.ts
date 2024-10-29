@@ -119,7 +119,8 @@ export class EditarPropiedadComponent implements OnInit {
                 aceptaMascotas: this.propiedadForm.value.aceptaMascotas,
                 tienePiscina: this.propiedadForm.value.tienePiscina,
                 tieneAsador: this.propiedadForm.value.tieneAsador,
-                valorNoche: this.propiedadForm.value.valorNoche
+                valorNoche: this.propiedadForm.value.valorNoche,
+                status: 1
             };
 
             console.log('Datos enviados:', propiedadActualizada);

@@ -86,7 +86,8 @@ export class AnadirPropiedadComponent implements OnInit {
                 this.propiedadForm.value.aceptaMascotas,
                 this.propiedadForm.value.tienePiscina,
                 this.propiedadForm.value.tieneAsador,
-                this.propiedadForm.value.valorNoche
+                this.propiedadForm.value.valorNoche,
+                1
             );
 
             this.propiedadService.crearPropiedad(nuevaPropiedad).subscribe({
