@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PropiedadService {
-  private apiUrl = 'http://127.0.0.1/api/propiedades';
+  private apiUrl = 'http://localhost:8082/api/propiedades';
 
   constructor(private http: HttpClient) { }
 

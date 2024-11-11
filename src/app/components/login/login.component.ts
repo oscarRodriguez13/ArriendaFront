@@ -28,27 +28,16 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const correo = this.loginForm.value.correo;
       const contrasenia = this.loginForm.value.contrasenia;
-
-      console.log('Datos enviados:', correo, contrasenia); 
   
-      this.usuarioService.checkCorreo(correo)
-        .then(usuario => {
-          if (!usuario) {
-            this.mensaje = 'Correo No Encontrado';
+      this.usuarioService.iniciarSesion(correo, contrasenia)
+        .then(usuarioAutenticado => {
+          if (!usuarioAutenticado) {
+            this.mensaje = 'Credenciales incorrectas';
             this.mensajeColor = 'red'; 
           } else {
-            this.usuarioService.checkContrasenia(correo, contrasenia)
-              .then(usuarioAutenticado => {
-                if (!usuarioAutenticado) {
-                  this.mensaje = 'Contraseña Incorrecta';
-                  this.mensajeColor = 'red'; 
-                } else {
-                  this.mensaje = 'Usuario Iniciado';
-                  this.mensajeColor = 'green'; 
-                  console.log('Usuario actual:', usuarioAutenticado);
-                  this.router.navigate(['/home']); 
-                }
-              });
+            this.mensaje = 'Usuario Iniciado';
+            this.mensajeColor = 'green'; 
+            this.router.navigate(['/home']); 
           }
         })
         .catch(error => {

@@ -7,7 +7,7 @@ import { Usuario } from '../../models/Usuario';
 })
 export class UsuarioService {
   private usuarioActual: Usuario | null = null;
-  private apiUrl = 'http://127.0.0.1/api/usuarios'; 
+  private apiUrl = 'http://localhost:8082/api/usuarios'; 
 
   constructor() {}
 
@@ -19,22 +19,17 @@ export class UsuarioService {
       });
   }
 
-  checkCorreo(correo: string): Promise<Usuario | null> {
-    return axios.get<Usuario>(`${this.apiUrl}/checkMail/${correo}`)
-      .then(response => response.data)
-      .catch(() => null);
-  }
+// usuario.service.ts
 
-  checkContrasenia(correo: string, contrasenia: string): Promise<Usuario | null> {
-    return axios.get<Usuario>(`${this.apiUrl}/checkPassword/${contrasenia}/${correo}`)
+  iniciarSesion(correo: string, contrasenia: string): Promise<Usuario | null> {
+    return axios.post<Usuario>(`${this.apiUrl}/login`, { correo, contrasenia })
       .then(response => {
-        if (response.data) {
-          this.setUsuarioActual(response.data);
-        }
+        this.setUsuarioActual(response.data);
         return response.data;
       })
-      .catch(() => null);
+      .catch(() => null); // Devolvemos null si falla la autenticación
   }
+
 
   setUsuarioActual(usuario: Usuario) {
     this.usuarioActual = usuario;
