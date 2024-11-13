@@ -15,6 +15,7 @@ import { SolicitudesComponent } from './components/solicitudes/solicitudes.compo
 import { SolicitarArriendoComponent } from './components/solicitar-arriendo/solicitar-arriendo.component';
 import { AnadirPropiedadComponent } from './components/anadir-propiedad/anadir-propiedad.component';
 import { PagarComponent } from './components/pagar/pagar.component';
+import { ResenasPropiedadComponent } from './components/resenas-propiedad/resenas-propiedad.component';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,7 @@ import { PagarComponent } from './components/pagar/pagar.component';
   
   imports: [RouterOutlet, RouterModule, RegistroComponent, BuscarComponent, LoginComponent, CommonModule, MisPropiedadesComponent, 
     MisAlquileresComponent, HeaderComponent, SolicitarArriendoComponent, MiPerfilComponent, EditarPerfilComponent, AnadirPropiedadComponent,
-     SolicitudesComponent, DetallesSolicitudComponent, DetallesAlquilerComponent, PagarComponent], 
+     SolicitudesComponent, DetallesSolicitudComponent, DetallesAlquilerComponent, PagarComponent, ResenasPropiedadComponent], 
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

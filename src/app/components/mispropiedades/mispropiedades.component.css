@@ -79,3 +79,19 @@
   transition: background-color 0.3s ease;
   padding: 10px 20px;
 }
+
+.resenas-btn{
+  background-color: #46c942;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 20px;
+  padding: 10px 20px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}

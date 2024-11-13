@@ -8,7 +8,7 @@ import { Alquiler, EstadoAlquiler } from '../../models/Alquiler';
 })
 export class AlquilerService {
 
-  private baseUrl = 'http://127.0.0.1/api/alquileres';
+  private baseUrl = 'http://127.0.0.1:8082/api/alquileres';
 
   constructor(private http: HttpClient) { }
 
@@ -28,11 +28,22 @@ export class AlquilerService {
     return this.http.post<Alquiler>(this.baseUrl, alquiler);
   }
 
+  aprobarAlquiler(alquiler: Alquiler): Observable<Alquiler> {
+    const alquilerActualizado = { ...alquiler, estado: EstadoAlquiler.APROBADO };
+    return this.http.put<Alquiler>(`${this.baseUrl}/${alquiler.id}`, alquilerActualizado);
+  }
+
+  rechazarAlquiler(alquiler: Alquiler): Observable<Alquiler> {
+    const alquilerActualizado = { ...alquiler, estado: EstadoAlquiler.RECHAZADO };
+    return this.http.put<Alquiler>(`${this.baseUrl}/${alquiler.id}`, alquilerActualizado);
+  }
 
   finalizarAlquiler(alquiler: Alquiler): Observable<Alquiler> {
     const alquilerActualizado = { ...alquiler, estado: EstadoAlquiler.FINALIZADO };
     return this.http.put<Alquiler>(`${this.baseUrl}/${alquiler.id}`, alquilerActualizado);
   }
+  
 
 
+  
 }

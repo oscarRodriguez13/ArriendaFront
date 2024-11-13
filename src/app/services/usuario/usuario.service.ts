@@ -7,7 +7,7 @@ import { Usuario } from '../../models/Usuario';
 })
 export class UsuarioService {
   private usuarioActual: Usuario | null = null;
-  private apiUrl = 'http://127.0.0.1/api/usuarios'; 
+  private apiUrl = 'http://127.0.0.1:8082/api/usuarios'; 
 
   constructor() {}
 
