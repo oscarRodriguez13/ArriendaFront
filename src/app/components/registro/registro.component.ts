@@ -49,7 +49,7 @@ export class RegistroComponent {
           this.mensajeColor = 'green';
           this.registroForm.reset();
           console.log('Usuario actual:', this.usuarioService.getUsuarioActual());
-          setTimeout(() => this.router.navigate(['/buscar']), 2000);  // Retraso de 2 segundos antes de navegar
+          setTimeout(() => this.router.navigate(['/login']), 2000);  // Retraso de 2 segundos antes de navegar
         })
         .catch(error => {
           console.error('Error al registrar usuario:', error);

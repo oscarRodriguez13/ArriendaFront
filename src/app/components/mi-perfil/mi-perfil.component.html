@@ -1,6 +1,5 @@
 <app-header></app-header>
-
-<div class="profile-container">
+<div *ngIf="usuarioActual" class="profile-container">
   <h2>Mi Perfil</h2>
   <div class="profile-info">
     <div class="profile-item">
@@ -19,4 +18,8 @@
     </div>
   </div>
   <button class="edit-button" (click)="editProfile()">Editar Información</button>
+</div>
+
+<div *ngIf="!usuarioActual" class="loading">
+  Cargando...
 </div>

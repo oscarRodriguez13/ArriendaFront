@@ -49,10 +49,12 @@ export class AnadirPropiedadComponent implements OnInit {
         });
     }
 
-    ngOnInit(): void {
-        const propietarioActual = this.usuarioService.getUsuarioActual();
+    async ngOnInit(): Promise<void> {
+        const propietarioActual = await this.usuarioService.getUsuarioActual();
         console.log('Propietario actual:', propietarioActual); // Verificar si existe un usuario actual
-        this.propiedadForm.patchValue({ propietario: propietarioActual });
+        if (propietarioActual) {
+            this.propiedadForm.patchValue({ propietario: propietarioActual });
+        }
 
         // Observa el estado del formulario y cada campo
         this.propiedadForm.statusChanges.subscribe(status => {
@@ -62,7 +64,7 @@ export class AnadirPropiedadComponent implements OnInit {
 
     anadirPropiedad() {
         if (this.propiedadForm.valid) {
-            const propietarioActual = this.usuarioService.getUsuarioActual();
+            const propietarioActual = this.propiedadForm.value.propietario;
 
             if (!propietarioActual) {
                 console.error('No hay un propietario actual en sesión.');
