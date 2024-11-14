@@ -7,7 +7,7 @@ import { jwtDecode } from "jwt-decode";
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiUrl = 'http://localhost:8082/api';
+  private apiUrl = 'http://http://127.0.0.1/api';
 
   constructor() {}
 

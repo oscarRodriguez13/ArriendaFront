@@ -6,7 +6,7 @@ import { Resenia } from '../../models/Resenia';
   providedIn: 'root'
 })
 export class ReseniaService {
-  private apiUrl = 'http://localhost:8082/api/resenias';
+  private apiUrl = 'http://127.0.0.1/api/resenias';
 
   constructor(private http: HttpClient) { }
 
