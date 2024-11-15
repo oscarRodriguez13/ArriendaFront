@@ -32,7 +32,7 @@ export class SolicitudesComponent {
       if (propietarioActual && propietarioActual.id !== null && propietarioActual.id !== undefined) {
         const propietarioId = propietarioActual.id;
   
-        this.alquilerService.getSolicitudesPorPropietario(propietarioId).subscribe({
+        this.alquilerService.getSolicitudesPorPropietario().subscribe({
           next: (solicitudes) => {
             this.solicitudes = solicitudes;
           },

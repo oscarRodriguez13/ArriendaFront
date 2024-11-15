@@ -34,7 +34,7 @@ export class MisAlquileresComponent implements OnInit {
       if (usuarioActual && usuarioActual.id) {
         const userId = usuarioActual.id;
 
-        this.alquilerService.getAlquileresPorUsuario(userId).subscribe({
+        this.alquilerService.getAlquileresPorUsuario().subscribe({
           next: (alquileres) => {
             this.alquileres = alquileres;
           },

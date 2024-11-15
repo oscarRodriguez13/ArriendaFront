@@ -8,7 +8,7 @@ import { Alquiler, EstadoAlquiler } from '../../models/Alquiler';
 })
 export class AlquilerService {
 
-  private baseUrl = 'http://127.0.0.1/api/alquileres';
+  private baseUrl = 'http://localhost:8082/api/alquileres';
 
   constructor(private http: HttpClient) { }
 
@@ -26,14 +26,14 @@ export class AlquilerService {
   }
 
 
-  getAlquileresPorUsuario(userId: number): Observable<Alquiler[]> {
+  getAlquileresPorUsuario(): Observable<Alquiler[]> {
     const headers = this.createHeaders();
-    return this.http.get<Alquiler[]>(`${this.baseUrl}/usuario/${userId}`, { headers });
+    return this.http.get<Alquiler[]>(`${this.baseUrl}/usuario/usuarioActual`, { headers });
   }
 
-  getSolicitudesPorPropietario(propietarioId: number): Observable<Alquiler[]> {
+  getSolicitudesPorPropietario(): Observable<Alquiler[]> {
     const headers = this.createHeaders();
-    return this.http.get<Alquiler[]>(`${this.baseUrl}/usuario/${propietarioId}/solicitudes`, { headers });
+    return this.http.get<Alquiler[]>(`${this.baseUrl}/usuario/usuarioActual/solicitudes`, { headers });
   }
   
 

@@ -7,7 +7,7 @@ import { Propiedad } from '../../models/Propiedad';
   providedIn: 'root'
 })
 export class PropiedadService {
-  private apiUrl = 'http://127.0.0.1/api/propiedades';
+  private apiUrl = 'http://localhost:8082/api/propiedades';
 
   constructor(private http: HttpClient) { }
 
@@ -24,14 +24,14 @@ export class PropiedadService {
     return headers;
   }
 
-  getPropiedadPorAlquilerNoAprobado(userId: number): Observable<Propiedad[]> {
+  getPropiedadPorAlquilerNoAprobado(): Observable<Propiedad[]> {
     const headers = this.createHeaders();
-    return this.http.get<Propiedad[]>(`${this.apiUrl}/usuario/${userId}/sin-alquiler-aprobado`, { headers });
+    return this.http.get<Propiedad[]>(`${this.apiUrl}/usuario/propietario/sin-alquiler-aprobado`, { headers });
   }
 
-  getPropiedadPorId(userId: number): Observable<Propiedad[]> {
+  getPropiedadPorId(): Observable<Propiedad[]> {
     const headers = this.createHeaders();
-    return this.http.get<Propiedad[]>(`${this.apiUrl}/usuario/${userId}`, { headers });
+    return this.http.get<Propiedad[]>(`${this.apiUrl}/usuario/propietario`, { headers });
   }
 
   putPropiedadPorID(propiedadId: number, propiedad: Propiedad): Observable<Propiedad> {

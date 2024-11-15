@@ -35,7 +35,7 @@ export class MisPropiedadesComponent implements OnInit {
       if (usuarioActual && usuarioActual.id) {
         const userId = usuarioActual.id;
 
-        this.propiedadUsuarioService.getPropiedadPorId(userId).subscribe({
+        this.propiedadUsuarioService.getPropiedadPorId().subscribe({
           next: (propiedades) => {
             this.propiedades = propiedades;
           },

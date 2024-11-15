@@ -7,7 +7,7 @@ import { jwtDecode } from "jwt-decode";
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiUrl = 'http://http://127.0.0.1/api';
+  private apiUrl = 'http://localhost:8082/api';
 
   constructor() {}
 
@@ -29,57 +29,38 @@ export class UsuarioService {
   }
 
   getUsuarioActual(): Promise<Usuario | null> {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token'); 
     if (token) {
-      const decoded: any = jwtDecode(token);
-      return axios.get<Usuario>(`${this.apiUrl}/usuarios/${decoded.id}`, {
+      return axios.get<Usuario>(`${this.apiUrl}/usuarios/usuarioActual`, {
         headers: {
-          'Authorization': `Bearer ${token}`  
+          'Authorization': `Bearer ${token}` 
         }
       })
-        .then(response => response.data)
+        .then(response => response.data) 
         .catch(() => null);
-    } 
+    }
     return Promise.resolve(null);
   }
+  
 
   updateUsuario(usuario: Usuario): Promise<Usuario> {
-    const token = localStorage.getItem('token');
-    console.log("PUT token " + token);
+    const token = localStorage.getItem('token'); 
     if (!token) {
-      return Promise.reject('No hay token disponible');
+      return Promise.reject('No hay token disponible'); 
     }
-    const decoded: any = jwtDecode(token);
-
-    return this.getUsuarioActual()
-      .then(async usuarioOriginal => {
-        if (!usuarioOriginal) {
-          throw new Error('No se pudo obtener el usuario actual');
-        }
-
-        return axios.put<Usuario>(`${this.apiUrl}/usuarios/${usuario.id}`, usuario, {
-          headers: {
-            'Authorization': `Bearer ${token}` 
-          }
-        })
-        .then(async response => {
-          // Si el correo ha sido modificado
-          if (usuario.correo !== usuarioOriginal.correo && usuario.correo != null) {
-            console.log("Correo original " + usuarioOriginal.correo);
-            console.log("Correo nuevo " + usuario.correo);
-            console.log("Contra " + decoded.contra);
-
-            // Realizar nuevo login con el nuevo correo
-            const nuevoToken = await this.iniciarSesion(usuario.correo, decoded.contra);
-            if (!nuevoToken) {
-              throw new Error('Error al actualizar el token con el nuevo correo');
-            }
-            localStorage.setItem('token', nuevoToken);
-          }
-          return response.data;
-        });
-    });
-}
+  
+    return axios.put<Usuario>(`${this.apiUrl}/usuarios/id`, usuario, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => response.data) 
+      .catch(error => {
+        console.error('Error actualizando el usuario:', error); 
+        throw error; 
+      });
+  }
+  
   logout() {
     localStorage.removeItem('token');
   }

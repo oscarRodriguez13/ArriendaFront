@@ -36,7 +36,7 @@ export class BuscarComponent implements OnInit {
       if (usuarioActual && usuarioActual.id) {
         const userId = usuarioActual.id;
 
-        this.propiedadService.getPropiedadPorAlquilerNoAprobado(userId).subscribe({
+        this.propiedadService.getPropiedadPorAlquilerNoAprobado().subscribe({
           next: (data: Propiedad[]) => {
             this.propiedades = data;
             this.propiedadesFiltradas = data;
