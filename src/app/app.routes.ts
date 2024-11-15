@@ -17,6 +17,7 @@ import { AnadirPropiedadComponent } from './components/anadir-propiedad/anadir-p
 import { EditarPropiedadComponent } from './components/editar-propiedad/editar-propiedad.component';
 import { DetallesAlquilerComponent } from './components/detalles-alquiler/detalles-alquiler.component';
 import { PagarComponent } from './components/pagar/pagar.component';
+import { ResenasPropiedadComponent } from './components/resenas-propiedad/resenas-propiedad.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -37,6 +38,8 @@ export const routes: Routes = [
     { path: 'pagar/:id', component: PagarComponent, canActivate: [AuthGuard] },
     { path: 'anadir-propiedad', component: AnadirPropiedadComponent },
     { path: 'editar-propiedad/:id', component: EditarPropiedadComponent, canActivate: [AuthGuard] },
+    { path: 'resenas-propiedad/:id', component: ResenasPropiedadComponent, canActivate: [AuthGuard] },
+    
     
 
 ];

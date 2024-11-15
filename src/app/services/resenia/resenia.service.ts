@@ -28,6 +28,11 @@ export class ReseniaService {
     return this.http.get<Resenia[]>(`${this.apiUrl}/usuario?idUsuario=${idUsuario}`, { headers });
   }
 
+  getReseniasPropiedad(idPropiedad: number): Observable<Resenia[]> {
+    const headers = this.createHeaders();
+    return this.http.get<Resenia[]>(`${this.apiUrl}/propiedad?idPropiedad=${idPropiedad}`);
+  }
+
   crearReseniaPropiedad(resenia: Resenia): Observable<Resenia> {
       const headers = this.createHeaders();
       return this.http.post<Resenia>(`${this.apiUrl}/propiedad`, resenia, { headers });

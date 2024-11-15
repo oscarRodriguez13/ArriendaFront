@@ -1,0 +1,23 @@
+<app-header></app-header>
+
+<div class="resenas-propiedad-container">
+    <h1 class="titulo">Reseñas de la propiedad {{ propiedad?.nombre }}</h1>
+
+<div class="resenias-container">
+      <h2>Reseñas de la propiedad</h2>
+      <div *ngFor="let resenia of resenias" class="resenia-card">
+        <p><strong>Calificación:</strong> {{ resenia.calificacion }}</p>
+        <p><strong>Comentario:</strong> {{ resenia.comentario }}</p>
+        <p><strong>Calificador:</strong> {{ resenia.usuarioCalificadorId.nombre }} {{ resenia.usuarioCalificadorId.apellido }}</p>
+      </div>
+      <div *ngIf="resenias.length === 0" class="no-resenias">
+        No hay reseñas disponibles para este inquilino.
+    </div>
+  </div>
+
+  <ng-template #noDetalles>
+    <p class="mensaje">{{ mensaje }}</p>
+  </ng-template>
+</div>
+
+<app-footer></app-footer>

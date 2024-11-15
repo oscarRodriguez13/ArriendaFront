@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <div class="detalles-solicitud-container">
-  <h1 class="titulo-detalles">Detalles del Alquiler</h1>
+  <h1 class="titulo-detalles">Detalles de la solicitud</h1>
 
   <div class="contenido-dividido" *ngIf="solicitud; else noDetalles">
     <div class="detalle-card">
@@ -15,6 +15,13 @@
       <p><strong>Fecha Fin:</strong> {{ solicitud.fechaFin | date }}</p>
       <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
       <p><strong>Comentarios:</strong> {{ solicitud.comentarios || 'No hay comentarios adicionales' }}</p>
+      
+      <button *ngIf="solicitud && solicitud.estado === estadoAlquiler.PENDIENTE" (click)="aprobarSolicitud()" class="aprobar-btn">
+        Aprobar Solicitud
+      </button>
+      <button *ngIf="solicitud && solicitud.estado === estadoAlquiler.PENDIENTE" (click)="denegarSolicitud()" class="denegar-btn">
+        Denegar Solicitud
+      </button>
     </div>
 
     <div class="resenias-container">

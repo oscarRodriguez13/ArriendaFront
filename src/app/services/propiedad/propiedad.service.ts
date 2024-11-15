@@ -34,6 +34,12 @@ export class PropiedadService {
     return this.http.get<Propiedad[]>(`${this.apiUrl}/usuario/propietario`, { headers });
   }
 
+  getPropiedadPorSuId(propiedadId: number): Observable<Propiedad> {
+    const headers = this.createHeaders();
+    return this.http.get<Propiedad>(`${this.apiUrl}/${propiedadId}`);
+  }
+
+
   putPropiedadPorID(propiedadId: number, propiedad: Propiedad): Observable<Propiedad> {
     const headers = this.createHeaders();
     return this.http.put<Propiedad>(`${this.apiUrl}/${propiedadId}`, propiedad, { headers });

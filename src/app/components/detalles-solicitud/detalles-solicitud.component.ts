@@ -8,7 +8,7 @@ import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { Resenia } from '../../models/Resenia';
 import { ReseniaService } from '../../services/resenia/resenia.service';
-
+import { EstadoAlquiler } from '../../models/Alquiler';
 
 @Component({
   selector: 'app-detalles-solicitud',
@@ -21,6 +21,8 @@ export class DetallesSolicitudComponent implements OnInit {
   solicitud: Alquiler | null = null;
   resenias: Resenia[] = [];
   mensaje: string = '';
+  estadoAlquiler = EstadoAlquiler;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +36,10 @@ export class DetallesSolicitudComponent implements OnInit {
       this.obtenerDetallesSolicitud(Number(id));
     }
   }
+  /*
+  public get estadoAlquiler(): typeof EstadoAlquiler {
+    return EstadoAlquiler;
+  }*/
 
   obtenerDetallesSolicitud(id: number): void {
     this.alquilerService.getAlquilerPorId(id).subscribe({
@@ -41,6 +47,9 @@ export class DetallesSolicitudComponent implements OnInit {
         this.solicitud = solicitud;
         if (solicitud.usuarioAsignado && solicitud.usuarioAsignado.id != null) {
           this.obtenerReseniasPorUsuario(solicitud.usuarioAsignado.id);
+          console.log('Estado de la solicitud:', this.solicitud?.estado);
+          console.log('Estado de la comparacion:', this.estadoAlquiler.PENDIENTE);
+          console.log('Comparando con PENDIENTE2:', this.solicitud?.estado.valueOf() === this.estadoAlquiler.PENDIENTE.valueOf());
         }
         
       },
@@ -61,5 +70,36 @@ export class DetallesSolicitudComponent implements OnInit {
         this.mensaje = `Error al cargar las reseñas: ${err.message || err.toString()}`;
       }
     });
+  }
+
+  aprobarSolicitud(): void {
+    if (this.solicitud) {
+      const solicitudActualizada = { ...this.solicitud, estado: EstadoAlquiler.APROBADO };
+      this.alquilerService.aprobarAlquiler(solicitudActualizada).subscribe({
+        next: () => {
+          console.log('Solicitud aprobada con éxito');
+          this.solicitud!.estado = EstadoAlquiler.APROBADO;
+        },
+        error: (err) => {
+          console.error('Error al aprobar la solicitud', err);
+          this.mensaje = 'No se pudo aprobar la solicitud. Intenta nuevamente.';
+        }
+      });
+    }
+  }
+
+  denegarSolicitud(): void {
+    if (this.solicitud) {
+      this.alquilerService.rechazarAlquiler(this.solicitud).subscribe({
+        next: () => {
+          console.log('Solicitud denegar con éxito');
+          this.solicitud!.estado = EstadoAlquiler.RECHAZADO;
+        },
+        error: (err) => {
+          console.error('Error al denegar la solicitud', err);
+          this.mensaje = 'No se pudo denegar la solicitud. Intenta nuevamente.';
+        }
+      });
+    }
   }
 }

@@ -47,12 +47,23 @@ export class AlquilerService {
     return this.http.post<Alquiler>(this.baseUrl, alquiler, { headers });
   }
 
+  aprobarAlquiler(alquiler: Alquiler): Observable<Alquiler> {
+    const alquilerActualizado = { ...alquiler, estado: EstadoAlquiler.APROBADO };
+    return this.http.put<Alquiler>(`${this.baseUrl}/${alquiler.id}`, alquilerActualizado);
+  }
+
+  rechazarAlquiler(alquiler: Alquiler): Observable<Alquiler> {
+    const alquilerActualizado = { ...alquiler, estado: EstadoAlquiler.RECHAZADO };
+    return this.http.put<Alquiler>(`${this.baseUrl}/${alquiler.id}`, alquilerActualizado);
+  }
 
   finalizarAlquiler(alquiler: Alquiler): Observable<Alquiler> {
     const alquilerActualizado = { ...alquiler, estado: EstadoAlquiler.FINALIZADO };
     const headers = this.createHeaders();
     return this.http.put<Alquiler>(`${this.baseUrl}/${alquiler.id}`, alquilerActualizado, { headers });
   }
+  
 
 
+  
 }

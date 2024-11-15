@@ -68,6 +68,10 @@ export class MisPropiedadesComponent implements OnInit {
     });
   }
 
+  resenasPropiedad(propiedadId: number): void {
+    this.router.navigate(['/resenas-propiedad', propiedadId]);
+  }
+
   editarPropiedad(propiedadId: number): void {
     this.router.navigate(['/editar-propiedad', propiedadId]);
   }

@@ -16,6 +16,7 @@
       <p><strong>Descripción:</strong> {{ propiedad.descripcion }}</p>
     </mat-card-content>
     <mat-card-actions>
+      <button mat-button class="resenas-btn" (click)="resenasPropiedad(propiedad.id ?? 0)">Reseñas</button>
       <button mat-button class="editar-btn" (click)="editarPropiedad(propiedad.id ?? 0)">Editar propiedad</button>
       <button mat-button class="desactivar-btn" (click)="desactivarPropiedad(propiedad.id ?? 0)">Desactivar
         propiedad</button>
