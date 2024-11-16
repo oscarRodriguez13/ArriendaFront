@@ -101,7 +101,7 @@ export class SolicitarArriendoComponent implements OnInit {
 
         // Si la propiedad existe, proceder con el cambio del atributo 'disponible' a false
         if (this.propiedad && this.propiedad.id !== null && this.propiedad.id !== undefined) {
-          this.propiedad.disponible = false;
+          this.propiedad.disponible = true;
           this.propiedadService.putPropiedadPorID(this.propiedad.id, this.propiedad).subscribe({
             next: () => {
               console.log('Propiedad actualizada con éxito');

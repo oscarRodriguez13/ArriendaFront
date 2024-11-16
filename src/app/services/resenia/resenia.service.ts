@@ -6,7 +6,7 @@ import { Resenia } from '../../models/Resenia';
   providedIn: 'root'
 })
 export class ReseniaService {
-  private apiUrl = 'http://localhost:8082/api/resenias';
+  private apiUrl = 'http://127.0.0.1/api/resenias';
 
   constructor(private http: HttpClient) { }
 
@@ -30,7 +30,7 @@ export class ReseniaService {
 
   getReseniasPropiedad(idPropiedad: number): Observable<Resenia[]> {
     const headers = this.createHeaders();
-    return this.http.get<Resenia[]>(`${this.apiUrl}/propiedad?idPropiedad=${idPropiedad}`);
+    return this.http.get<Resenia[]>(`${this.apiUrl}/propiedad?idPropiedad=${idPropiedad}`, { headers });
   }
 
   crearReseniaPropiedad(resenia: Resenia): Observable<Resenia> {

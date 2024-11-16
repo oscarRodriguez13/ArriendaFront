@@ -7,7 +7,7 @@ import { Propiedad } from '../../models/Propiedad';
   providedIn: 'root'
 })
 export class PropiedadService {
-  private apiUrl = 'http://localhost:8082/api/propiedades';
+  private apiUrl = 'http://127.0.0.1/api/propiedades';
 
   constructor(private http: HttpClient) { }
 
@@ -36,7 +36,7 @@ export class PropiedadService {
 
   getPropiedadPorSuId(propiedadId: number): Observable<Propiedad> {
     const headers = this.createHeaders();
-    return this.http.get<Propiedad>(`${this.apiUrl}/${propiedadId}`);
+    return this.http.get<Propiedad>(`${this.apiUrl}/${propiedadId}`, { headers });
   }
 
 
