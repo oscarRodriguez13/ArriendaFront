@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../../services/usuario/usuario.service';  
 
 @Component({
   selector: 'app-buscar',
@@ -20,30 +21,36 @@ export class BuscarComponent implements OnInit {
   propiedadesFiltradas: Propiedad[] = [];
   busqueda: string = '';
 
-  constructor(private propiedadService: PropiedadService, private router: Router) { }
+  constructor(
+    private propiedadService: PropiedadService,
+    private usuarioService: UsuarioService,  
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.cargarPropiedades();
   }
 
   cargarPropiedades(): void {
-    const usuarioActualString = localStorage.getItem('usuarioActual');
-    if (usuarioActualString) {
-      const usuarioActual = JSON.parse(usuarioActualString);
-      const userId = usuarioActual.id;
+    this.usuarioService.getUsuarioActual().then(usuarioActual => {
+      if (usuarioActual && usuarioActual.id) {
+        const userId = usuarioActual.id;
 
-      this.propiedadService.getPropiedadPorAlquilerNoAprobado(userId).subscribe({
-        next: (data: Propiedad[]) => {
-          this.propiedades = data;
-          this.propiedadesFiltradas = data;
-        },
-        error: (err) => {
-          console.error('Error al obtener las propiedades', err);
-        }
-      });
-    } else {
-      console.error('No se encontró el usuarioActual en localStorage');
-    }
+        this.propiedadService.getPropiedadPorAlquilerNoAprobado().subscribe({
+          next: (data: Propiedad[]) => {
+            this.propiedades = data;
+            this.propiedadesFiltradas = data;
+          },
+          error: (err) => {
+            console.error('Error al obtener las propiedades', err);
+          }
+        });
+      } else {
+        console.error('No se encontró el usuario actual');
+      }
+    }).catch(err => {
+      console.error('Error al obtener el usuario actual', err);
+    });
   }
 
   filtrarPropiedades(): void {
@@ -51,19 +58,19 @@ export class BuscarComponent implements OnInit {
       str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
     this.propiedadesFiltradas = this.propiedades.filter(propiedad => {
-      const propietarioNombre = propiedad.propietario?.nombre || ''; // Usa un valor por defecto si es undefined
+      const propietarioNombre = propiedad.propietario?.nombre || '';
       const area = propiedad.area !== null && propiedad.area !== undefined ? propiedad.area.toString() : '0'; // Valor por defecto para area
       const valorNoche = propiedad.valorNoche !== null && propiedad.valorNoche !== undefined ? propiedad.valorNoche.toString() : '0'; // Valor por defecto para valorNoche
 
       return (
-        normalize(propiedad.ciudad || '') // Asegúrate de que ciudad no sea undefined
+        normalize(propiedad.ciudad || '') 
           .includes(normalize(this.busqueda)) ||
-        normalize(propiedad.descripcion || '') // Asegúrate de que descripción no sea undefined
+        normalize(propiedad.descripcion || '') 
           .includes(normalize(this.busqueda)) ||
-        normalize(propietarioNombre) // propietarioNombre ya tiene un valor por defecto
+        normalize(propietarioNombre) 
           .includes(normalize(this.busqueda)) ||
-        area.includes(normalize(this.busqueda)) || // Convierte a string para la comparación
-        valorNoche.includes(normalize(this.busqueda)) // Convierte a string para la comparación
+        area.includes(normalize(this.busqueda)) || 
+        valorNoche.includes(normalize(this.busqueda)) 
       );
     });
   }
@@ -75,4 +82,3 @@ export class BuscarComponent implements OnInit {
     });
   }
 }
-

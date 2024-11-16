@@ -55,27 +55,11 @@ export class DetallesAlquilerComponent {
     if (!this.alquiler) {
       return false;
     }
-
- 
-
-    if (!this.alquiler.fechaFin) {
-      console.log("Fecha de fin no disponible.");
-      return false;
-    }
-
+  
     const fechaVencida = this.isVencida(this.alquiler.fechaFin);
-    const estadoPendiente = this.alquiler.estado === EstadoAlquiler.PENDIENTE;
-
-/*
-    console.log("Fecha de Fin:", this.alquiler.fechaFin);
-    console.log("Estado del Alquiler:", this.alquiler.estado);
-    console.log("¿Estado es PENDIENTE?", estadoPendiente);
-    console.log("¿Fecha fin está vencida?", fechaVencida);
-
-    */
-    
-    // Devuelve el resultado de la condición final
-    return !fechaVencida;
+    const estadoAprobado = this.alquiler.estado === EstadoAlquiler.APROBADO;
+  
+    return estadoAprobado && !fechaVencida;
   }
   
 }

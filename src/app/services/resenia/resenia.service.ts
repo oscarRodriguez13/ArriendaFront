@@ -1,34 +1,46 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Resenia } from '../../models/Resenia';
 @Injectable({
   providedIn: 'root'
 })
 export class ReseniaService {
-  private apiUrl = 'http://127.0.0.1:8082/api/resenias';
+  private apiUrl = 'http://127.0.0.1/api/resenias';
 
   constructor(private http: HttpClient) { }
 
-  // Obtener reseñas que pertenecen a un usuario (inquilino)
+  private getToken(): string | null {
+    return localStorage.getItem('token'); 
+  }
+
+  private createHeaders(): HttpHeaders {
+    const token = this.getToken();
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  }
+
   getReseniasPorUsuario(idUsuario: number): Observable<Resenia[]> {
-    return this.http.get<Resenia[]>(`${this.apiUrl}/usuario?idUsuario=${idUsuario}`);
+    const headers = this.createHeaders();
+    return this.http.get<Resenia[]>(`${this.apiUrl}/usuario?idUsuario=${idUsuario}`, { headers });
   }
 
-    // Obtener reseñas que pertenecen a una propiedad 
   getReseniasPropiedad(idPropiedad: number): Observable<Resenia[]> {
-    return this.http.get<Resenia[]>(`${this.apiUrl}/propiedad?idPropiedad=${idPropiedad}`);
+    const headers = this.createHeaders();
+    return this.http.get<Resenia[]>(`${this.apiUrl}/propiedad?idPropiedad=${idPropiedad}`, { headers });
   }
 
-
-    // Crear una reseña para una propiedad
-    crearReseniaPropiedad(resenia: Resenia): Observable<Resenia> {
-      return this.http.post<Resenia>(`${this.apiUrl}/propiedad`, resenia);
-    }
+  crearReseniaPropiedad(resenia: Resenia): Observable<Resenia> {
+      const headers = this.createHeaders();
+      return this.http.post<Resenia>(`${this.apiUrl}/propiedad`, resenia, { headers });
+  }
   
-    // Crear una reseña para un usuario (propietario)
-    crearReseniaPropietario(resenia: Resenia): Observable<Resenia> {
-      return this.http.post<Resenia>(`${this.apiUrl}/usuario`, resenia);
-    }
+  crearReseniaPropietario(resenia: Resenia): Observable<Resenia> {
+    const headers = this.createHeaders();
+    return this.http.post<Resenia>(`${this.apiUrl}/usuario`, resenia, { headers });
+  }
 
 }

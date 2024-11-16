@@ -16,16 +16,13 @@
       <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
       <p><strong>Comentarios:</strong> {{ solicitud.comentarios || 'No hay comentarios adicionales' }}</p>
       
-      <button *ngIf="solicitud && solicitud.estado === estadoAlquiler.PENDIENTE" (click)="aprobarSolicitud()" class="aprobar-btn">
-        Aprobar Solicitud
-      </button>
-      <button *ngIf="solicitud && solicitud.estado === estadoAlquiler.PENDIENTE" (click)="denegarSolicitud()" class="denegar-btn">
-        Denegar Solicitud
-      </button>
+      <button *ngIf="solicitud.estado === estadoAlquiler.PENDIENTE" (click)="aprobarSolicitud()" class="aprobar-btn">Aprobar Solicitud</button>
+      <button *ngIf="solicitud.estado === estadoAlquiler.PENDIENTE" (click)="denegarSolicitud()" class="denegar-btn">Denegar Solicitud</button>
+      
     </div>
 
     <div class="resenias-container">
-      <h2>Reseñas del Inquilino</h2>
+      <h2>Reseñas de los Inquilinos</h2>
       <div *ngFor="let resenia of resenias" class="resenia-card">
         <p><strong>Calificación:</strong> {{ resenia.calificacion }}</p>
         <p><strong>Comentario:</strong> {{ resenia.comentario }}</p>

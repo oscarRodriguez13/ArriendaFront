@@ -7,6 +7,8 @@ import { Alquiler, EstadoAlquiler } from '../../models/Alquiler';
 import { AlquilerService } from '../../services/alquiler/alquiler.service';
 import { PropiedadService } from '../../services/propiedad/propiedad.service'; // Asegúrate de importar el servicio de propiedad
 import { Usuario } from '../../models/Usuario';
+import { UsuarioService } from '../../services/usuario/usuario.service';
+
 
 @Component({
   selector: 'app-solicitar-arriendo',
@@ -25,7 +27,8 @@ export class SolicitarArriendoComponent implements OnInit {
   constructor(
     private router: Router,
     private alquilerService: AlquilerService,
-    private propiedadService: PropiedadService // Añadir el servicio de propiedad
+    private propiedadService: PropiedadService,
+    private usuarioService: UsuarioService
   ) { }
 
   ngOnInit() {
@@ -37,16 +40,21 @@ export class SolicitarArriendoComponent implements OnInit {
       console.error('No se recibió información de la propiedad');
       this.errorMensaje = 'No se recibió información de la propiedad';
     }
-
-    const usuarioActualString = localStorage.getItem('usuarioActual');
-    if (usuarioActualString) {
-      this.alquiler.usuarioAsignado = JSON.parse(usuarioActualString) as Usuario;
-    } else {
-      console.error('No se encontró el usuario actual en localStorage');
-      this.errorMensaje = 'No se encontró el usuario actual en la sesión';
-    }
+  
+    // Fetch the current user using the getUsuarioActual method
+    this.usuarioService.getUsuarioActual().then(usuarioActual => {
+      if (usuarioActual) {
+        this.alquiler.usuarioAsignado = usuarioActual;
+      } else {
+        console.error('No se encontró el usuario actual');
+        this.errorMensaje = 'No se encontró el usuario actual en la sesión';
+      }
+    }).catch(err => {
+      console.error('Error al obtener el usuario actual', err);
+      this.errorMensaje = `Error al cargar el usuario actual: ${err.message || err.toString()}`;
+    });
   }
-
+  
   validarFechas() {
     this.errorMensaje = '';
 
@@ -93,7 +101,7 @@ export class SolicitarArriendoComponent implements OnInit {
 
         // Si la propiedad existe, proceder con el cambio del atributo 'disponible' a false
         if (this.propiedad && this.propiedad.id !== null && this.propiedad.id !== undefined) {
-          this.propiedad.disponible = false;
+          this.propiedad.disponible = true;
           this.propiedadService.putPropiedadPorID(this.propiedad.id, this.propiedad).subscribe({
             next: () => {
               console.log('Propiedad actualizada con éxito');

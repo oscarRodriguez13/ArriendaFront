@@ -1,44 +1,62 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import axios from 'axios';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Propiedad } from '../../models/Propiedad';
-import { HttpClient } from '@angular/common/http';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class PropiedadService {
-  private apiUrl = 'http://127.0.0.1:8082/api/propiedades';
+  private apiUrl = 'http://127.0.0.1/api/propiedades';
 
   constructor(private http: HttpClient) { }
 
-  getPropiedadPorAlquilerNoAprobado(userId: number): Observable<Propiedad[]> {
-    return this.http.get<Propiedad[]>(`${this.apiUrl}/usuario/${userId}/sin-alquiler-aprobado`);
+  private getToken(): string | null {
+    return localStorage.getItem('token'); 
   }
 
-  getPropiedadPorId(userId: number): Observable<Propiedad[]> {
-    return this.http.get<Propiedad[]>(`${this.apiUrl}/usuario/${userId}`);
+  private createHeaders(): HttpHeaders {
+    const token = this.getToken();
+    let headers = new HttpHeaders();
+    if (token) {
+      headers = headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  }
+
+  getPropiedadPorAlquilerNoAprobado(): Observable<Propiedad[]> {
+    const headers = this.createHeaders();
+    return this.http.get<Propiedad[]>(`${this.apiUrl}/usuario/propietario/sin-alquiler-aprobado`, { headers });
+  }
+
+  getPropiedadPorId(): Observable<Propiedad[]> {
+    const headers = this.createHeaders();
+    return this.http.get<Propiedad[]>(`${this.apiUrl}/usuario/propietario`, { headers });
   }
 
   getPropiedadPorSuId(propiedadId: number): Observable<Propiedad> {
-    return this.http.get<Propiedad>(`${this.apiUrl}/${propiedadId}`);
+    const headers = this.createHeaders();
+    return this.http.get<Propiedad>(`${this.apiUrl}/${propiedadId}`, { headers });
   }
 
+
   putPropiedadPorID(propiedadId: number, propiedad: Propiedad): Observable<Propiedad> {
-    return this.http.put<Propiedad>(`${this.apiUrl}/${propiedadId}`, propiedad);
+    const headers = this.createHeaders();
+    return this.http.put<Propiedad>(`${this.apiUrl}/${propiedadId}`, propiedad, { headers });
   }
 
   crearPropiedad(propiedad: Propiedad): Observable<Propiedad> {
-    return this.http.post<Propiedad>(`${this.apiUrl}`, propiedad);
+    const headers = this.createHeaders();
+    return this.http.post<Propiedad>(`${this.apiUrl}`, propiedad, { headers });
   }
 
   getInfoPropiedadById(propiedadId: number): Observable<Propiedad> {
-    return this.http.get<Propiedad>(`${this.apiUrl}/${propiedadId}`);
+    const headers = this.createHeaders();
+    return this.http.get<Propiedad>(`${this.apiUrl}/${propiedadId}`, { headers });
   }
 
   desactivarPropiedad(propiedadId: number): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${propiedadId}/desactivar`, null);
+    const headers = this.createHeaders();
+    return this.http.put<void>(`${this.apiUrl}/${propiedadId}/desactivar`, null, { headers });
   }
-
 }

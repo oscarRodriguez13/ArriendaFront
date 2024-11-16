@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Propiedad } from '../../models/Propiedad';
 import { PropiedadService } from '../../services/propiedad/propiedad.service';
+import { UsuarioService } from '../../services/usuario/usuario.service';  // Import UsuarioService
 import { MatCardModule } from '@angular/material/card';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -21,39 +22,36 @@ export class MisPropiedadesComponent implements OnInit {
 
   constructor(
     private propiedadUsuarioService: PropiedadService,
+    private usuarioService: UsuarioService, 
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.getPropiedadesPorId();
-
-    if (typeof localStorage !== 'undefined') {
-      const usuarioActualString = localStorage.getItem('usuarioActual');
-      console.log(usuarioActualString);
-    } else {
-      console.error('localStorage no está disponible.');
-    }
+    this.getPropiedadesPorId(); 
   }
 
   getPropiedadesPorId(): void {
-    const usuarioActualString = localStorage.getItem('usuarioActual');
-    if (usuarioActualString) {
-      const usuarioActual = JSON.parse(usuarioActualString);
-      const userId = usuarioActual.id;
+    this.usuarioService.getUsuarioActual().then(usuarioActual => {
+      if (usuarioActual && usuarioActual.id) {
+        const userId = usuarioActual.id;
 
-      this.propiedadUsuarioService.getPropiedadPorId(userId).subscribe({
-        next: (propiedades) => {
-          this.propiedades = propiedades;
-        },
-        error: (err) => {
-          console.error('Error al obtener los alquileres', err);
-          this.mensaje = `Error al cargar los alquileres: ${err.message || err.toString()}`;
-        }
-      });
-    } else {
-      console.error('No se encontró el usuarioActual en localStorage');
-      this.mensaje = 'No se encontró el usuario actual.';
-    }
+        this.propiedadUsuarioService.getPropiedadPorId().subscribe({
+          next: (propiedades) => {
+            this.propiedades = propiedades;
+          },
+          error: (err) => {
+            console.error('Error al obtener los alquileres', err);
+            this.mensaje = `Error al cargar los alquileres: ${err.message || err.toString()}`;
+          }
+        });
+      } else {
+        console.error('No se encontró el usuario actual');
+        this.mensaje = 'No se encontró el usuario actual.';
+      }
+    }).catch(err => {
+      console.error('Error al obtener el usuario actual', err);
+      this.mensaje = `Error al cargar las propiedades: ${err.message || err.toString()}`;
+    });
   }
 
   // Método para desactivar la propiedad
@@ -78,4 +76,3 @@ export class MisPropiedadesComponent implements OnInit {
     this.router.navigate(['/editar-propiedad', propiedadId]);
   }
 }
-

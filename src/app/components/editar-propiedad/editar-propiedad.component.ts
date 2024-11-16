@@ -93,55 +93,62 @@ export class EditarPropiedadComponent implements OnInit {
         });
     }
 
-    actualizarPropiedad(): void {
+    async actualizarPropiedad(): Promise<void> {
         if (this.propiedadForm.valid) {
-            const propietarioActual = this.usuarioService.getUsuarioActual();
-
-            if (!propietarioActual) {
-                console.error('No hay un propietario actual en sesión.');
-                this.mensaje = 'Error: No hay un propietario actual en sesión.';
-                this.mensajeColor = 'red';
-                return;
-            }
-
-            const propiedadActualizada: Propiedad = {
-                id: this.propiedadId,
-                nombre: this.propiedadForm.value.nombre,
-                area: this.propiedadForm.value.area,
-                propietario: propietarioActual,
-                ciudad: this.propiedadForm.value.ciudad,
-                tipoIngreso: this.propiedadForm.value.tipoIngreso,
-                disponible: this.propiedadForm.value.disponible,
-                tipoPropiedad: this.propiedadForm.value.tipoPropiedad,
-                descripcion: this.propiedadForm.value.descripcion,
-                cantidadHabitaciones: this.propiedadForm.value.cantidadHabitaciones,
-                cantidadBanios: this.propiedadForm.value.cantidadBanios,
-                aceptaMascotas: this.propiedadForm.value.aceptaMascotas,
-                tienePiscina: this.propiedadForm.value.tienePiscina,
-                tieneAsador: this.propiedadForm.value.tieneAsador,
-                valorNoche: this.propiedadForm.value.valorNoche,
-                status: 1
-            };
-
-            console.log('Datos enviados:', propiedadActualizada);
-
-            this.propiedadService.putPropiedadPorID(this.propiedadId, propiedadActualizada).subscribe({
-                next: () => {
-                    this.mensaje = 'Propiedad actualizada correctamente';
-                    this.mensajeColor = 'green';
-                    setTimeout(() => this.router.navigate(['/mispropiedades']), 2000);
-                },
-                error: (err) => {
-                    console.error('Error al actualizar la propiedad', err);
-                    this.mensaje = 'Error al actualizar la propiedad';
+            try {
+                const propietarioActual = await this.usuarioService.getUsuarioActual(); // Resolve the Promise
+    
+                if (!propietarioActual) {
+                    console.error('No hay un propietario actual en sesión.');
+                    this.mensaje = 'Error: No hay un propietario actual en sesión.';
                     this.mensajeColor = 'red';
+                    return;
                 }
-            });
+    
+                const propiedadActualizada: Propiedad = {
+                    id: this.propiedadId,
+                    nombre: this.propiedadForm.value.nombre,
+                    area: this.propiedadForm.value.area,
+                    propietario: propietarioActual,
+                    ciudad: this.propiedadForm.value.ciudad,
+                    tipoIngreso: this.propiedadForm.value.tipoIngreso,
+                    disponible: this.propiedadForm.value.disponible,
+                    tipoPropiedad: this.propiedadForm.value.tipoPropiedad,
+                    descripcion: this.propiedadForm.value.descripcion,
+                    cantidadHabitaciones: this.propiedadForm.value.cantidadHabitaciones,
+                    cantidadBanios: this.propiedadForm.value.cantidadBanios,
+                    aceptaMascotas: this.propiedadForm.value.aceptaMascotas,
+                    tienePiscina: this.propiedadForm.value.tienePiscina,
+                    tieneAsador: this.propiedadForm.value.tieneAsador,
+                    valorNoche: this.propiedadForm.value.valorNoche,
+                    status: 1
+                };
+    
+                console.log('Datos enviados:', propiedadActualizada);
+    
+                this.propiedadService.putPropiedadPorID(this.propiedadId, propiedadActualizada).subscribe({
+                    next: () => {
+                        this.mensaje = 'Propiedad actualizada correctamente';
+                        this.mensajeColor = 'green';
+                        setTimeout(() => this.router.navigate(['/mispropiedades']), 2000);
+                    },
+                    error: (err) => {
+                        console.error('Error al actualizar la propiedad', err);
+                        this.mensaje = 'Error al actualizar la propiedad';
+                        this.mensajeColor = 'red';
+                    }
+                });
+            } catch (error) {
+                console.error('Error al obtener el propietario actual', error);
+                this.mensaje = 'Error al obtener el propietario actual';
+                this.mensajeColor = 'red';
+            }
         } else {
             this.mensaje = 'Por favor, complete todos los campos correctamente';
             this.mensajeColor = 'red';
         }
     }
+    
 
 }
 

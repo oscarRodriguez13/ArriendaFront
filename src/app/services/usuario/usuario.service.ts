@@ -1,78 +1,67 @@
 import { Injectable } from '@angular/core';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Usuario } from '../../models/Usuario';
+import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
-  private usuarioActual: Usuario | null = null;
-  private apiUrl = 'http://127.0.0.1:8082/api/usuarios'; 
+  private apiUrl = 'http://127.0.0.1/api';
 
   constructor() {}
 
   crearUsuario(usuario: Usuario): Promise<Usuario> {
-    return axios.post<Usuario>(`${this.apiUrl}`, usuario)
-      .then(response => {
-        this.setUsuarioActual(response.data);
-        return response.data;
-      });
+    return axios.post<Usuario>(`${this.apiUrl}/auth/register`, usuario)
+      .then(response => response.data);
   }
 
-  checkCorreo(correo: string): Promise<Usuario | null> {
-    return axios.get<Usuario>(`${this.apiUrl}/checkMail/${correo}`)
-      .then(response => response.data)
-      .catch(() => null);
-  }
-
-  checkContrasenia(correo: string, contrasenia: string): Promise<Usuario | null> {
-    return axios.get<Usuario>(`${this.apiUrl}/checkPassword/${contrasenia}/${correo}`)
+  iniciarSesion(correo: string, contrasenia: string): Promise<string | null> {
+    return axios.post<{ token: string }>(`${this.apiUrl}/auth/login`, { correo, contrasenia })
       .then(response => {
-        if (response.data) {
-          this.setUsuarioActual(response.data);
+        const token = response.data.token;
+        if (token) {
+          localStorage.setItem('token', token); 
         }
-        return response.data;
+        return token;
       })
       .catch(() => null);
   }
 
-  setUsuarioActual(usuario: Usuario) {
-    this.usuarioActual = usuario;
-    localStorage.setItem('usuarioActual', JSON.stringify(usuario));
-  }
-
-  getUsuarioActual(): Usuario | null {
-    if (typeof localStorage !== 'undefined') {
-      if (!this.usuarioActual) {
-        const storedUsuario = localStorage.getItem('usuarioActual');
-        if (storedUsuario) {
-          try {
-            this.usuarioActual = JSON.parse(storedUsuario);
-          } catch (error) {
-            console.error("Error al parsear el usuario desde localStorage:", error);
-            this.usuarioActual = null;
-          }
+  getUsuarioActual(): Promise<Usuario | null> {
+    const token = localStorage.getItem('token'); 
+    if (token) {
+      return axios.get<Usuario>(`${this.apiUrl}/usuarios/usuarioActual`, {
+        headers: {
+          'Authorization': `Bearer ${token}` 
         }
-      }
-      return this.usuarioActual;
-    } else {
-      console.warn("localStorage no está disponible en este entorno.");
-      return null;
+      })
+        .then(response => response.data) 
+        .catch(() => null);
     }
+    return Promise.resolve(null);
   }
+  
 
   updateUsuario(usuario: Usuario): Promise<Usuario> {
-    console.log('Usuario a actualizar:', usuario);
-    return axios.put<Usuario>(`${this.apiUrl}/${this.usuarioActual?.id}`, usuario)
-      .then(response => {
-        this.setUsuarioActual(response.data);
-        return response.data;
+    const token = localStorage.getItem('token'); 
+    if (!token) {
+      return Promise.reject('No hay token disponible'); 
+    }
+  
+    return axios.put<Usuario>(`${this.apiUrl}/usuarios/id`, usuario, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => response.data) 
+      .catch(error => {
+        console.error('Error actualizando el usuario:', error); 
+        throw error; 
       });
   }
-
-
+  
   logout() {
-    this.usuarioActual = null;
-    localStorage.removeItem('usuarioActual');
+    localStorage.removeItem('token');
   }
 }
