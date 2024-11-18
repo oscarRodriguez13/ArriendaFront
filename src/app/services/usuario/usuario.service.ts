@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { Usuario } from '../../models/Usuario';
-import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
