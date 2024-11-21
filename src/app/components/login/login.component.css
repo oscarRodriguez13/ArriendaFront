@@ -1,20 +1,66 @@
+/* Estilos generales */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f7f8fa;
+  margin: 0;
+  padding: 0;
+}
+
+.login-page {
+  display: flex;
+  height: 100vh;
+}
+
+.login-image {
+  flex: 1;
+  background: url('/assets/login-background.jpg') no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.login-image h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.login-image h1 span {
+  color: #FFD700; /* Dorado */
+}
+
+.login-image p {
+  font-size: 1.2rem;
+  max-width: 70%;
+}
+
+.login-form-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 500px;
-  margin: 40px auto;
+  max-width: 400px;
   padding: 30px;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
 }
 
 .login-form h2 {
   text-align: center;
   font-size: 2rem;
-  color: #2D572C; /* Color verde oscuro */
+  color: #2D572C;
   margin-bottom: 20px;
   font-weight: bold;
 }
@@ -59,7 +105,7 @@ input:focus {
   gap: 10px;
   width: 100%;
   padding: 12px 20px;
-  background-color: #2D572C; /* Verde oscuro */
+  background-color: #2D572C;
   color: white;
   border: none;
   border-radius: 5px;
@@ -89,7 +135,7 @@ input:focus {
   align-items: center;
   gap: 5px;
   padding: 8px 15px;
-  background-color: #FFA500; /* Naranja */
+  background-color: #FFA500;
   color: white;
   border: none;
   border-radius: 5px;
@@ -100,7 +146,7 @@ input:focus {
 }
 
 .registro-prompt button:hover {
-  background-color: #e69500; /* Naranja más oscuro */
+  background-color: #e69500;
   transform: translateY(-2px);
 }
 
