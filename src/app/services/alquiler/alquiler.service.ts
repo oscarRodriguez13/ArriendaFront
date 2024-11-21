@@ -10,6 +10,7 @@ export class AlquilerService {
 
   private baseUrl = 'http://localhost:8082/api/alquileres';
 
+
   constructor(private http: HttpClient) { }
 
   private getToken(): string | null {

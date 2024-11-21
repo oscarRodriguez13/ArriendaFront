@@ -1,35 +1,117 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f7f8fa; 
+}
+
+.contenedor-principal {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .buscar-container {
-  margin: 20px;
+  margin: 20px auto;
+  max-width: 1200px;
+  text-align: center;
 }
 
 .titulo-propiedades {
-  text-align: center;  
-  font-size: 2.2rem;   
-  font-weight: bold;   
-  margin-bottom: 20px; 
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.busqueda-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.busqueda-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.busqueda-input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 8px rgba(0, 128, 0, 0.3);
+}
+
+.btn-buscar {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-buscar:hover {
+  background-color: #45a049;
 }
 
 .resultados {
   display: flex;
-  flex-wrap: wrap; 
-  gap: 20px;
+  justify-content: flex-start; 
+  gap: 20px; 
 }
 
 .tarjeta {
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex: 1 1;
+  max-width: calc(100%); 
+  min-width: 280px;
+}
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta mat-card-header {
+  background-color: #2D572C;
+  color: white;
+  padding: 10px;
+}
+
+.tarjeta mat-card-content {
   padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  max-width: max-content; 
-  position: relative;
+}
+
+.tarjeta p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.tarjeta .precio {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #46c942;
 }
 
 .card-footer {
   display: flex;
-  justify-content: flex-end; 
-  margin-top: 10px;
+  justify-content: flex-end;
+  padding: 10px;
+  background-color: #f9f9f9;
 }
 
 .aplicar-btn {
@@ -37,40 +119,57 @@
   color: white;
   border: none;
   padding: 8px 16px;
-  border-radius: 4px;
+  font-size: 1rem;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .aplicar-btn:hover {
-  background-color: #45a049; 
+  background-color: #45a049;
 }
 
-.tarjeta h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+.no-resultados {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  margin-top: 20px;
 }
 
-.tarjeta p {
-  margin: 5px 0;
-  color: #333;
-}
-.busqueda-input {
-  width: 100%;
-  max-width: 400px;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.iconos {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los iconos bajen si hay muchos */
+  gap: 10px; /* Espaciado entre los iconos */
+  margin-top: 10px;
 }
 
-.busqueda-input:focus {
-  outline: none;
-  border-color: #4CAF50;
-  box-shadow: 0 0 8px rgba(0, 128, 0, 0.2);
+.iconos span {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Espaciado entre el icono y el texto */
+  font-size: 0.9rem;
+  color: #555; /* Color neutro para el texto */
 }
 
-app-footer {
-  margin-top: auto; /* Hace que el footer se mantenga al final */
+.iconos i {
+  font-size: 1.2rem; /* Tamaño del icono */
+  color: #46c942; /* Color para destacar los iconos */
 }
+
+mat-card-subtitle {
+  display: flex;
+  justify-content: space-between; /* Distribuye el subtítulo */
+  margin-bottom: 10px; /* Añade un margen para separar del resto del contenido */
+  font-size: 1rem; /* Tamaño ajustado del texto */
+  color: #555; /* Color del texto */
+}
+
+.calificacion {
+  font-weight: bold;
+}
+
+.ubicacion {
+  font-style: italic;
+}
+
+

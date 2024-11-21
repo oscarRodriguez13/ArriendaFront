@@ -1,27 +1,40 @@
 <div class="contenedor-principal">
+  <div class="solicitudes-container">
+    <h1 class="titulo-solicitudes">Solicitudes de Alquiler a Mis Propiedades</h1>
 
+    <div class="resultados">
+      <!-- Aplicamos el pipe ordenarAlquileres -->
+      <mat-card *ngFor="let solicitud of solicitudes | ordenarAlquileres" class="tarjeta">
+        <!-- Encabezado -->
+        <mat-card-header>
+          <mat-card-title><strong>Propiedad:</strong> {{ solicitud.propiedad.nombre }}</mat-card-title>
+        </mat-card-header>
 
-<div class="solicitudes-container">
-  <h1 class="titulo-solicitudes">Solicitudes de Alquiler a Mis Propiedades</h1>
+        <!-- Contenido Principal -->
+        <mat-card-content>
+          <div class="detalles-solicitud">
+            <p><i class="fas fa-map-marker-alt"></i> <strong>Ciudad:</strong> {{ solicitud.propiedad.ciudad }}</p>
+            <p><i class="fas fa-ruler-combined"></i> <strong>Área:</strong> {{ solicitud.propiedad.area }} m²</p>
+            <p><i class="fas fa-user"></i> <strong>Inquilino:</strong> {{ solicitud.usuarioAsignado.nombre }} {{ solicitud.usuarioAsignado.apellido }}</p>
+            <p><i class="fas fa-calendar-alt"></i> <strong>Fecha Inicio:</strong> {{ solicitud.fechaInicio | date }}</p>
+            <p><i class="fas fa-calendar-check"></i> <strong>Fecha Fin:</strong> {{ solicitud.fechaFin | date }}</p>
+          </div>
+        </mat-card-content>
 
-  <div class="resultados">
-    <mat-card *ngFor="let solicitud of solicitudes" class="tarjeta">
-      <mat-card-header>
-        <mat-card-title><strong>Propiedad:</strong> {{ solicitud.propiedad.nombre }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p><strong>Ciudad:</strong> {{ solicitud.propiedad.ciudad }}</p>
-        <p><strong>Área:</strong> {{ solicitud.propiedad.area }} m²</p>
-        <p><strong>Inquilino:</strong> {{ solicitud.usuarioAsignado.nombre }} {{ solicitud.usuarioAsignado.apellido }}</p>
-        <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
-      </mat-card-content>
-      <div class="card-footer">
-        <button class="aplicar-btn" (click)="detallesSolicitud(solicitud)">Detalles Solicitud</button>
+        <!-- Estado y Acciones -->
+        <mat-card-actions class="acciones-tarjeta">
+          <div class="estado-solicitud" [ngClass]="solicitud.estado.toLowerCase()">
+            <i class="fas fa-info-circle"></i> {{ solicitud.estado }}
+          </div>
+          <button class="aplicar-btn" (click)="detallesSolicitud(solicitud)">Detalles Solicitud</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <!-- Mensaje si no hay solicitudes -->
+      <div *ngIf="solicitudes.length === 0" class="no-solicitudes">
+        {{ mensaje }}
       </div>
-    </mat-card>
-    <div *ngIf="solicitudes.length === 0">{{ mensaje }}</div>
+    </div>
   </div>
 </div>
 
-
-</div>

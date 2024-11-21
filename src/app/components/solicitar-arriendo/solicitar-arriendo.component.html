@@ -2,32 +2,34 @@
   <h2 class="titulo-solicitud">Solicitud de Arriendo para: {{propiedad?.nombre || 'Propiedad'}}</h2>
 
   <div class="contenido-dividido" *ngIf="propiedad; else noPropiedadTemplate">
+    <!-- Detalles de la propiedad -->
     <div class="detalles-propiedad">
       <h3>Detalles de la Propiedad</h3>
-      <p><strong>Nombre:</strong> {{propiedad.nombre}}</p>
-      <p><strong>Área:</strong> {{propiedad.area}} m²</p>
-      <p><strong>Propietario:</strong> {{propiedad?.propietario?.nombre}} {{propiedad?.propietario?.apellido}}</p>
-      <p><strong>Ciudad:</strong> {{propiedad.ciudad}}</p>
-      <p><strong>Tipo de Propiedad:</strong> {{propiedad.tipoPropiedad}}</p>
-      <p><strong>Descripción:</strong> {{propiedad.descripcion}}</p>
-      <p><strong>Cantidad de Habitaciones:</strong> {{propiedad.cantidadHabitaciones}}</p>
-      <p><strong>Cantidad de Baños:</strong> {{propiedad.cantidadBanios}}</p>
-      <p><strong>Acepta Mascotas:</strong> {{propiedad.aceptaMascotas ? 'Sí' : 'No'}}</p>
-      <p><strong>Tiene Piscina:</strong> {{propiedad.tienePiscina ? 'Sí' : 'No'}}</p>
-      <p><strong>Tiene Asador:</strong> {{propiedad.tieneAsador ? 'Sí' : 'No'}}</p>
-      <p><strong>Valor por dNoche:</strong> ${{propiedad.valorNoche}}</p>
+      <p><i class="fas fa-home"></i> <strong>Nombre:</strong> {{propiedad.nombre}}</p>
+      <p><i class="fas fa-ruler-combined"></i> <strong>Área:</strong> {{propiedad.area}} m²</p>
+      <p><i class="fas fa-user"></i> <strong>Propietario:</strong> {{propiedad?.propietario?.nombre}} {{propiedad?.propietario?.apellido}}</p>
+      <p><i class="fas fa-map-marker-alt"></i> <strong>Ciudad:</strong> {{propiedad.ciudad}}</p>
+      <p><i class="fas fa-building"></i> <strong>Tipo de Propiedad:</strong> {{propiedad.tipoPropiedad}}</p>
+      <p><i class="fas fa-align-left"></i> <strong>Descripción:</strong> {{propiedad.descripcion}}</p>
+      <p><i class="fas fa-bed"></i> <strong>Cantidad de Habitaciones:</strong> {{propiedad.cantidadHabitaciones}}</p>
+      <p><i class="fas fa-bath"></i> <strong>Cantidad de Baños:</strong> {{propiedad.cantidadBanios}}</p>
+      <p><i class="fas fa-paw"></i> <strong>Acepta Mascotas:</strong> {{propiedad.aceptaMascotas ? 'Sí' : 'No'}}</p>
+      <p><i class="fas fa-swimming-pool"></i> <strong>Tiene Piscina:</strong> {{propiedad.tienePiscina ? 'Sí' : 'No'}}</p>
+      <p><i class="fas fa-fire"></i> <strong>Tiene Asador:</strong> {{propiedad.tieneAsador ? 'Sí' : 'No'}}</p>
+      <p><i class="fas fa-dollar-sign"></i> <strong>Valor por Noche:</strong> ${{propiedad.valorNoche}}</p>
     </div>
 
+    <!-- Formulario de solicitud -->
     <div class="formulario-solicitud">
       <h3>Solicitud de Alquiler</h3>
       <form (ngSubmit)="onSubmit()">
         <div class="form-group">
-          <label for="fechaInicio">Fecha de Inicio:</label>
+          <label for="fechaInicio"><i class="fas fa-calendar-alt"></i> Fecha de Inicio:</label>
           <input type="date" id="fechaInicio" name="fechaInicio" [(ngModel)]="fechaInicio"
             (change)="onFechaInicioChange()" required>
         </div>
         <div class="form-group">
-          <label for="fechaFin">Fecha de Fin:</label>
+          <label for="fechaFin"><i class="fas fa-calendar-check"></i> Fecha de Fin:</label>
           <input type="date" id="fechaFin" name="fechaFin" [(ngModel)]="fechaFin" (change)="onFechaFinChange()"
             required>
         </div>
@@ -37,12 +39,10 @@
         <button type="submit" class="aplicar-btn">Enviar Solicitud</button>
       </form>
     </div>
-
   </div>
 
   <ng-template #noPropiedadTemplate>
     <p class="no-propiedad-mensaje">No se ha recibido información de la propiedad. Por favor, vuelva a la página de
       búsqueda e intente nuevamente.</p>
   </ng-template>
-
 </div>

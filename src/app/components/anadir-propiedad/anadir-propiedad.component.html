@@ -1,57 +1,93 @@
-
 <div class="form-container">
-    <h2>Añadir Nueva Propiedad</h2>
+    <h2 class="titulo-formulario">Añadir Nueva Propiedad</h2>
     <form [formGroup]="propiedadForm" (ngSubmit)="anadirPropiedad()">
-        <div>
-            <label for="nombre">Nombre</label>
-            <input id="nombre" formControlName="nombre" type="text" required>
-        </div>
-        <div>
-            <label for="area">Área (m²)</label>
-            <input id="area" formControlName="area" type="number" required>
-        </div>
-        <div>
-            <label for="ciudad">Ciudad</label>
-            <input id="ciudad" formControlName="ciudad" type="text" required>
-        </div>
-        <div>
-            <label for="tipoPropiedad">Tipo de Propiedad</label>
-            <select id="tipoPropiedad" formControlName="tipoPropiedad" required>
-                <option [ngValue]="null">Seleccione una opción</option>
-                <option *ngFor="let option of tipoPropiedadOptions" [ngValue]="option.valor">{{ option.nombre }}
-                </option>
-            </select>
-        </div>
-        <div>
-            <label for="tipoIngreso">Tipo de Ingreso</label>
-            <select id="tipoIngreso" formControlName="tipoIngreso" required>
-                <option [ngValue]="null">Seleccione una opción</option>
-                <option *ngFor="let option of tipoIngresoOptions" [ngValue]="option.valor">{{ option.nombre }}</option>
-            </select>
-        </div>
-        <div>
-            <label for="descripcion">Descripción</label>
-            <textarea id="descripcion" formControlName="descripcion" required></textarea>
-        </div>
-        <div>
-            <label for="cantidadBanios">Cantidad de Baños</label>
-            <input id="cantidadBanios" formControlName="cantidadBanios" type="number" required>
-        </div>
-        <div>
-            <label for="cantidadHabitaciones">Cantidad de Habitaciones</label>
-            <input id="cantidadHabitaciones" formControlName="cantidadHabitaciones" type="number" required>
-        </div>
-        <div>
-            <label for="valorNoche">Valor por Noche</label>
-            <input id="valorNoche" formControlName="valorNoche" type="number" required>
-        </div>
-        <div class="checkbox-group">
-            <label><input type="checkbox" formControlName="disponible"> Disponible</label>
-            <label><input type="checkbox" formControlName="aceptaMascotas"> Acepta Mascotas</label>
-            <label><input type="checkbox" formControlName="tienePiscina"> Tiene Piscina</label>
-            <label><input type="checkbox" formControlName="tieneAsador"> Tiene Asador</label>
-        </div>
-        <button type="submit" [disabled]="!propiedadForm.valid">Añadir Propiedad</button>
+      <!-- Primera columna -->
+      <div>
+        <label for="nombre">
+          <i class="fas fa-home"></i> Nombre
+        </label>
+        <input id="nombre" formControlName="nombre" type="text" placeholder="Ej: Finca La Bella" required>
+      </div>
+      <div>
+        <label for="area">
+          <i class="fas fa-ruler-combined"></i> Área (m²)
+        </label>
+        <input id="area" formControlName="area" type="number" placeholder="Ej: 500" required>
+      </div>
+      <div>
+        <label for="ciudad">
+          <i class="fas fa-map-marker-alt"></i> Ciudad
+        </label>
+        <input id="ciudad" formControlName="ciudad" type="text" placeholder="Ej: Medellín" required>
+      </div>
+      <div>
+        <label for="tipoPropiedad">
+          <i class="fas fa-building"></i> Tipo de Propiedad
+        </label>
+        <select id="tipoPropiedad" formControlName="tipoPropiedad" required>
+          <option [ngValue]="null">Seleccione una opción</option>
+          <option *ngFor="let option of tipoPropiedadOptions" [ngValue]="option.valor">{{ option.nombre }}</option>
+        </select>
+      </div>
+      <div>
+        <label for="tipoIngreso">
+          <i class="fas fa-road"></i> Tipo de Ingreso
+        </label>
+        <select id="tipoIngreso" formControlName="tipoIngreso" required>
+          <option [ngValue]="null">Seleccione una opción</option>
+          <option *ngFor="let option of tipoIngresoOptions" [ngValue]="option.valor">{{ option.nombre }}</option>
+        </select>
+      </div>
+      <div>
+        <label for="valorNoche">
+          <i class="fas fa-dollar-sign"></i> Valor por Noche
+        </label>
+        <input id="valorNoche" formControlName="valorNoche" type="number" placeholder="Ej: 200000" required>
+      </div>
+      <div>
+        <label for="cantidadHabitaciones">
+          <i class="fas fa-bed"></i> Habitaciones
+        </label>
+        <input id="cantidadHabitaciones" formControlName="cantidadHabitaciones" type="number" placeholder="Ej: 4" required>
+      </div>
+      <div>
+        <label for="cantidadBanios">
+          <i class="fas fa-bath"></i> Baños
+        </label>
+        <input id="cantidadBanios" formControlName="cantidadBanios" type="number" placeholder="Ej: 2" required>
+      </div>
+  
+      <!-- Descripción ocupa toda la línea -->
+      <div class="descripcion">
+        <label for="descripcion">
+          <i class="fas fa-align-left"></i> Descripción
+        </label>
+        <textarea id="descripcion" formControlName="descripcion" placeholder="Describe la propiedad..." required></textarea>
+      </div>
+  
+      <!-- Checkboxes ocupan toda la línea -->
+      <div class="checkbox-group">
+        <label class="checkbox-container">
+          <input type="checkbox" formControlName="disponible">
+          <span class="custom-checkbox"></span> Disponible
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" formControlName="aceptaMascotas">
+          <span class="custom-checkbox"></span> Acepta Mascotas
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" formControlName="tienePiscina">
+          <span class="custom-checkbox"></span> Tiene Piscina
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" formControlName="tieneAsador">
+          <span class="custom-checkbox"></span> Tiene Asador
+        </label>
+      </div>
+  
+      <!-- Botón de envío ocupa toda la línea -->
+      <button type="submit" [disabled]="!propiedadForm.valid">Añadir Propiedad</button>
     </form>
     <p [style.color]="mensajeColor">{{ mensaje }}</p>
-</div>
+  </div>
+  

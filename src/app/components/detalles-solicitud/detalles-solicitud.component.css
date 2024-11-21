@@ -1,47 +1,63 @@
 .detalles-solicitud-container {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+  margin: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
 }
 
 .titulo-detalles {
   text-align: center;
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  color: #2D572C;
+  margin-bottom: 30px;
 }
 
-/* Clase de contenedor dividido */
 .contenido-dividido {
   display: flex;
   gap: 20px;
 }
 
-/* Sección de los detalles del alquiler */
-.detalle-card, .resenias-container {
-  flex: 1;
+.detalles-propiedad {
+  flex: 2; /* Ocupa más espacio que las reseñas */
   background-color: #f9f9f9;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: calc(100vh - 200px);
 }
 
-.detalle-card h3, .resenias-container h2 {
-  font-size: 1.5rem;
+.resenias-container {
+  flex: 1; /* Ocupa menos espacio en la parte derecha */
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: calc(100vh - 200px);
+}
+
+.detalles-propiedad h3, .resenias-container h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
   margin-bottom: 15px;
-  color: #333;
+  color: #2D572C;
 }
 
-.detalle-card p, .resenias-container p {
+.detalles-propiedad p, .resenias-container p {
+  display: flex;
+  align-items: center;
   font-size: 1.1rem;
-  color: #333;
+  color: #555;
   margin-bottom: 10px;
+  gap: 10px;
 }
 
-/* Tarjetas de reseñas individuales */
+.detalles-propiedad i, .resenias-container i {
+  font-size: 1.5rem;
+  color: #46c942;
+}
+
 .resenia-card {
   background-color: #ffffff;
   border: 1px solid #ddd;
@@ -52,55 +68,127 @@
 
 .no-resenias {
   text-align: center;
-  font-size: 1.1rem;
-  color: #666;
-  margin-top: 20px;
-}
-
-.mensaje {
-  text-align: center;
   font-size: 1.2rem;
-  color: #666;
+  color: #888;
   margin-top: 20px;
 }
 
-/* Responsivo para pantallas pequeñas */
-@media (max-width: 768px) {
-  .contenido-dividido {
-      flex-direction: column;
-  }
+.botones-acciones {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
 }
 
 .aprobar-btn {
-  background-color: #4CAF50; 
+  background-color: #4CAF50;
   color: white;
   border: none;
-  border-radius: 5px;
   padding: 10px 20px;
+  border-radius: 8px;
   font-size: 1rem;
-  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-right: 10px;
 }
 
 .aprobar-btn:hover {
-  background-color: #45a049; 
+  background-color: #45a049;
 }
 
 .denegar-btn {
-  background-color: #F44336; 
+  background-color: #F44336;
   color: white;
   border: none;
-  border-radius: 5px;
   padding: 10px 20px;
+  border-radius: 8px;
   font-size: 1rem;
-  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-right: 10px;
 }
 
 .denegar-btn:hover {
   background-color: #d32f2f;
 }
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .contenido-dividido {
+    flex-direction: column;
+  }
+
+  .detalles-propiedad, .resenias-container {
+    max-height: unset;
+  }
+}
+
+.resenias-container {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.resenias-container h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #2D572C;
+}
+
+.resenia-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.resenia-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.calificacion {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+.nombre-usuario {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.fecha {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.resenia-cuerpo {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+.resenia-cuerpo p {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaciado entre el icono y el texto */
+}
+
+.resenia-cuerpo a.ver-mas:hover {
+  text-decoration: underline;
+}
+
+.no-resenias {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+}
+

@@ -1,27 +1,61 @@
+<div class="contenedor-principal">
+  <div class="buscar-container">
+    <h1 class="titulo-propiedades">Propiedades Disponibles</h1>
 
+    <div class="busqueda-container">
+      <input type="text" placeholder="Buscar por palabra clave..." class="busqueda-input" [(ngModel)]="busqueda"
+        (ngModelChange)="filtrarPropiedades()" />
+      <button class="btn-buscar" (click)="filtrarPropiedades()">Buscar</button>
+    </div>
 
-<div class="buscar-container">
-  <h1 class="titulo-propiedades">Propiedades disponibles</h1>
+    <div class="resultados">
+      <mat-card *ngFor="let propiedad of propiedadesFiltradas" class="tarjeta">
+        <!-- Encabezado solo con el título -->
+        <mat-card-header>
+          <mat-card-title>
+            <strong>{{ propiedad.nombre }}</strong>
+          </mat-card-title>
+        </mat-card-header>
+        
+        <!-- Contenido principal -->
+        <mat-card-content>
+          <!-- Subtítulo ahora en el contenido -->
+          <mat-card-subtitle>
+            <span class="calificacion">{{ propiedad.valorNoche }} USD/Noche</span>
+            <span class="ubicacion">{{ propiedad.ciudad }}</span>
+          </mat-card-subtitle>
+          
+          <!-- Detalles de la propiedad -->
+          <p><strong>Área:</strong> {{ propiedad.area }} m²</p>
+          <p><strong>Descripción:</strong> {{ propiedad.descripcion }}</p>
+    
+          <!-- Iconos dinámicos -->
+          <div class="iconos">
+            <span *ngIf="propiedad.cantidadHabitaciones">
+              <i class="fas fa-bed"></i> {{ propiedad.cantidadHabitaciones }} Hab.
+            </span>
+            <span *ngIf="propiedad.cantidadBanios">
+              <i class="fas fa-bath"></i> {{ propiedad.cantidadBanios }} Baños
+            </span>
+            <span *ngIf="propiedad.tienePiscina">
+              <i class="fas fa-swimming-pool"></i> Piscina
+            </span>
+            <span *ngIf="propiedad.tieneAsador">
+              <i class="fas fa-fire"></i> Asador
+            </span>
+            <span *ngIf="propiedad.aceptaMascotas">
+              <i class="fas fa-paw"></i> Mascotas
+            </span>
+          </div>
+        </mat-card-content>
+    
+        <!-- Pie de la tarjeta -->
+        <div class="card-footer">
+          <button class="aplicar-btn" (click)="aplicar(propiedad)">Alquilar propiedad</button>
+        </div>
+      </mat-card>
+    </div>
+    
 
-  <input type="text" placeholder="Buscar por palabra clave..." class="busqueda-input" [(ngModel)]="busqueda"
-    (ngModelChange)="filtrarPropiedades()" />
-
-  <div class="resultados">
-    <mat-card *ngFor="let propiedad of propiedadesFiltradas" class="tarjeta">
-      <mat-card-header>
-        <mat-card-title><strong>Propietario: </strong>{{propiedad?.propietario?.nombre}}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p><strong>Dirección:</strong> {{ propiedad.ciudad }}</p>
-        <p><strong>Área:</strong> {{ propiedad.area }} m²</p>
-        <p><strong>Descripción:</strong> {{ propiedad.descripcion }}</p>
-        <p><strong>Precio:</strong> ${{ propiedad.valorNoche }}</p>
-      </mat-card-content>
-      <div class="card-footer">
-        <button class="aplicar-btn" (click)="aplicar(propiedad)">Aplicar</button>
-      </div>
-    </mat-card>
-    <div *ngIf="propiedadesFiltradas.length === 0">No se encontraron propiedades.</div>
   </div>
 </div>
-

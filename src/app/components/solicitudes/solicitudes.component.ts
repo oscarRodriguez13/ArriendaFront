@@ -7,12 +7,12 @@ import { FooterComponent } from '../footer/footer.component';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario/usuario.service';
-
+import { OrdenarAlquileresPipe } from '../../shared/pipes/ordenar-alquileres.pipe';
 
 @Component({
   selector: 'app-solicitudes',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, FooterComponent, MatCardModule,],
+  imports: [CommonModule, HeaderComponent, FooterComponent, MatCardModule,OrdenarAlquileresPipe],
   templateUrl: './solicitudes.component.html',
   styleUrl: './solicitudes.component.css'
 })
