@@ -6,7 +6,7 @@ import { Usuario } from '../../models/Usuario';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiUrl = 'http://localhost/api';
+  private apiUrl = 'http://localhost:8082/api';
 
   constructor() {}
 
