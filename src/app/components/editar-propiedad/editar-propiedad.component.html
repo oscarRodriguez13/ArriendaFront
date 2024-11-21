@@ -1,123 +1,143 @@
-
 <div class="form-container">
+    <h2 class="titulo-formulario">Editar Propiedad</h2>
     <form [formGroup]="propiedadForm" (ngSubmit)="actualizarPropiedad()">
-        <div class="form-row">
-            <div class="form-group">
-                <label for="nombre">Nombre de la Propiedad</label>
-                <input id="nombre" formControlName="nombre" type="text" />
-                <div class="error" *ngIf="propiedadForm.get('nombre')?.invalid && propiedadForm.get('nombre')?.touched">
-                    El nombre es obligatorio.
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="area">Área (m²)</label>
-                <input id="area" formControlName="area" type="number" />
-                <div class="error" *ngIf="propiedadForm.get('area')?.invalid && propiedadForm.get('area')?.touched">
-                    El área debe ser mayor que 0.
-                </div>
-            </div>
+      <!-- Primera fila -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nombre">
+            <i class="fas fa-home"></i> Nombre de la Propiedad
+          </label>
+          <input id="nombre" formControlName="nombre" type="text" placeholder="Ej: Finca La Bella" />
+          <div class="error" *ngIf="propiedadForm.get('nombre')?.invalid && propiedadForm.get('nombre')?.touched">
+            El nombre es obligatorio.
+          </div>
         </div>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label for="ciudad">Ciudad</label>
-                <input id="ciudad" formControlName="ciudad" type="text" />
-                <div class="error" *ngIf="propiedadForm.get('ciudad')?.invalid && propiedadForm.get('ciudad')?.touched">
-                    La ciudad es obligatoria.
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="tipoIngreso">Tipo de Ingreso</label>
-                <select id="tipoIngreso" formControlName="tipoIngreso">
-                    <option *ngFor="let tipo of tipoIngresoOptions" [ngValue]="tipo.valor">{{ tipo.nombre }}</option>
-                </select>
-                <div class="error"
-                    *ngIf="propiedadForm.get('tipoIngreso')?.invalid && propiedadForm.get('tipoIngreso')?.touched">
-                    Selecciona un tipo de ingreso.
-                </div>
-            </div>
+  
+        <div class="form-group">
+          <label for="area">
+            <i class="fas fa-ruler-combined"></i> Área (m²)
+          </label>
+          <input id="area" formControlName="area" type="number" placeholder="Ej: 500" />
+          <div class="error" *ngIf="propiedadForm.get('area')?.invalid && propiedadForm.get('area')?.touched">
+            El área debe ser mayor que 0.
+          </div>
         </div>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label for="tipoPropiedad">Tipo de Propiedad</label>
-                <select id="tipoPropiedad" formControlName="tipoPropiedad">
-                    <option *ngFor="let tipo of tipoPropiedadOptions" [ngValue]="tipo.valor">{{ tipo.nombre }}</option>
-                </select>
-                <div class="error"
-                    *ngIf="propiedadForm.get('tipoPropiedad')?.invalid && propiedadForm.get('tipoPropiedad')?.touched">
-                    Selecciona un tipo de propiedad.
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="cantidadHabitaciones">Habitaciones</label>
-                <input id="cantidadHabitaciones" formControlName="cantidadHabitaciones" type="number" />
-                <div class="error"
-                    *ngIf="propiedadForm.get('cantidadHabitaciones')?.invalid && propiedadForm.get('cantidadHabitaciones')?.touched">
-                    El número de habitaciones debe ser mayor que 0.
-                </div>
-            </div>
+      </div>
+  
+      <!-- Segunda fila -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="ciudad">
+            <i class="fas fa-map-marker-alt"></i> Ciudad
+          </label>
+          <input id="ciudad" formControlName="ciudad" type="text" placeholder="Ej: Medellín" />
+          <div class="error" *ngIf="propiedadForm.get('ciudad')?.invalid && propiedadForm.get('ciudad')?.touched">
+            La ciudad es obligatoria.
+          </div>
         </div>
-
-        <div class="form-row">
-            <div class="form-group">
-                <label for="cantidadBanios">Baños</label>
-                <input id="cantidadBanios" formControlName="cantidadBanios" type="number" />
-                <div class="error"
-                    *ngIf="propiedadForm.get('cantidadBanios')?.invalid && propiedadForm.get('cantidadBanios')?.touched">
-                    El número de baños debe ser mayor que 0.
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="valorNoche">Valor por Noche</label>
-                <input id="valorNoche" formControlName="valorNoche" type="number" />
-                <div class="error"
-                    *ngIf="propiedadForm.get('valorNoche')?.invalid && propiedadForm.get('valorNoche')?.touched">
-                    El valor debe ser mayor que 0.
-                </div>
-            </div>
+  
+        <div class="form-group">
+          <label for="tipoIngreso">
+            <i class="fas fa-road"></i> Tipo de Ingreso
+          </label>
+          <select id="tipoIngreso" formControlName="tipoIngreso">
+            <option [ngValue]="null">Seleccione una opción</option>
+            <option *ngFor="let tipo of tipoIngresoOptions" [ngValue]="tipo.valor">{{ tipo.nombre }}</option>
+          </select>
+          <div class="error" *ngIf="propiedadForm.get('tipoIngreso')?.invalid && propiedadForm.get('tipoIngreso')?.touched">
+            Selecciona un tipo de ingreso.
+          </div>
         </div>
-
-        <div class="form-row checkbox-group">
-            <label>
-                <input type="checkbox" formControlName="disponible" />
-                Disponible
-            </label>
-
-            <label>
-                <input type="checkbox" formControlName="aceptaMascotas" />
-                Acepta Mascotas
-            </label>
-
-            <label>
-                <input type="checkbox" formControlName="tienePiscina" />
-                Tiene Piscina
-            </label>
-
-            <label>
-                <input type="checkbox" formControlName="tieneAsador" />
-                Tiene Asador
-            </label>
+      </div>
+  
+      <!-- Tercera fila -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="tipoPropiedad">
+            <i class="fas fa-building"></i> Tipo de Propiedad
+          </label>
+          <select id="tipoPropiedad" formControlName="tipoPropiedad">
+            <option [ngValue]="null">Seleccione una opción</option>
+            <option *ngFor="let tipo of tipoPropiedadOptions" [ngValue]="tipo.valor">{{ tipo.nombre }}</option>
+          </select>
+          <div class="error"
+            *ngIf="propiedadForm.get('tipoPropiedad')?.invalid && propiedadForm.get('tipoPropiedad')?.touched">
+            Selecciona un tipo de propiedad.
+          </div>
         </div>
-
-        <div class="form-row">
-            <div class="form-group full-width">
-                <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" formControlName="descripcion"></textarea>
-                <div class="error"
-                    *ngIf="propiedadForm.get('descripcion')?.invalid && propiedadForm.get('descripcion')?.touched">
-                    La descripción es obligatoria.
-                </div>
-            </div>
+  
+        <div class="form-group">
+          <label for="cantidadHabitaciones">
+            <i class="fas fa-bed"></i> Habitaciones
+          </label>
+          <input id="cantidadHabitaciones" formControlName="cantidadHabitaciones" type="number" placeholder="Ej: 4" />
+          <div class="error"
+            *ngIf="propiedadForm.get('cantidadHabitaciones')?.invalid && propiedadForm.get('cantidadHabitaciones')?.touched">
+            El número de habitaciones debe ser mayor que 0.
+          </div>
         </div>
-
-        <button type="submit" [disabled]="propiedadForm.invalid">Actualizar Propiedad</button>
+      </div>
+  
+      <!-- Cuarta fila -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cantidadBanios">
+            <i class="fas fa-bath"></i> Baños
+          </label>
+          <input id="cantidadBanios" formControlName="cantidadBanios" type="number" placeholder="Ej: 2" />
+          <div class="error"
+            *ngIf="propiedadForm.get('cantidadBanios')?.invalid && propiedadForm.get('cantidadBanios')?.touched">
+            El número de baños debe ser mayor que 0.
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="valorNoche">
+            <i class="fas fa-dollar-sign"></i> Valor por Noche
+          </label>
+          <input id="valorNoche" formControlName="valorNoche" type="number" placeholder="Ej: 200000" />
+          <div class="error" *ngIf="propiedadForm.get('valorNoche')?.invalid && propiedadForm.get('valorNoche')?.touched">
+            El valor debe ser mayor que 0.
+          </div>
+        </div>
+      </div>
+  
+      <!-- Checkbox -->
+      <div class="form-row checkbox-group">
+        <label class="checkbox-container">
+          <input type="checkbox" formControlName="disponible">
+          <span class="custom-checkbox"></span> Disponible
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" formControlName="aceptaMascotas">
+          <span class="custom-checkbox"></span> Acepta Mascotas
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" formControlName="tienePiscina">
+          <span class="custom-checkbox"></span> Tiene Piscina
+        </label>
+        <label class="checkbox-container">
+          <input type="checkbox" formControlName="tieneAsador">
+          <span class="custom-checkbox"></span> Tiene Asador
+        </label>
+      </div>
+  
+      <!-- Descripción -->
+      <div class="form-row">
+        <div class="form-group full-width">
+          <label for="descripcion">
+            <i class="fas fa-align-left"></i> Descripción
+          </label>
+          <textarea id="descripcion" formControlName="descripcion" placeholder="Describe la propiedad..."></textarea>
+          <div class="error"
+            *ngIf="propiedadForm.get('descripcion')?.invalid && propiedadForm.get('descripcion')?.touched">
+            La descripción es obligatoria.
+          </div>
+        </div>
+      </div>
+  
+      <!-- Botón -->
+      <button type="submit" [disabled]="propiedadForm.invalid">Actualizar Propiedad</button>
     </form>
-
-    <p [style.color]="mensajeColor">{{ mensaje }}</p>
-</div>
-
+  </div>
+  

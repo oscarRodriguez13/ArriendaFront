@@ -1,25 +1,36 @@
+<div class="contenedor-principal">
+  <div *ngIf="usuarioActual" class="profile-container">
+    <h2><i class="fas fa-user-circle"></i> Mi Perfil</h2>
 
-<div *ngIf="usuarioActual" class="profile-container">
-  <h2>Mi Perfil</h2>
-  <div class="profile-info">
-    <div class="profile-item">
-      <label for="nombre">Nombre:</label>
-      <span id="nombre">{{ usuarioActual.nombre }}</span>
-      <label for="apellido" style="margin-left: 20px;">Apellido:</label>
-      <span id="apellido">{{ usuarioActual.apellido }}</span>
+    <div class="profile-info">
+      <div class="profile-item">
+        <i class="fas fa-user"></i>
+        <label for="nombre">Nombre:</label>
+        <span id="nombre">{{ usuarioActual.nombre }}</span>
+      </div>
+      <div class="profile-item">
+        <i class="fas fa-user"></i>
+        <label for="apellido">Apellido:</label>
+        <span id="apellido">{{ usuarioActual.apellido }}</span>
+      </div>
+      <div class="profile-item">
+        <i class="fas fa-envelope"></i>
+        <label for="correo">Correo:</label>
+        <span id="correo">{{ usuarioActual.correo }}</span>
+      </div>
+      <div class="profile-item">
+        <i class="fas fa-calendar-alt"></i>
+        <label for="edad">Edad:</label>
+        <span id="edad">{{ usuarioActual.edad }}</span>
+      </div>
     </div>
-    <div class="profile-item">
-      <label for="correo">Correo:</label>
-      <span id="correo">{{ usuarioActual.correo }}</span>
-    </div>
-    <div class="profile-item">
-      <label for="edad">Edad:</label>
-      <span id="edad">{{ usuarioActual.edad }}</span>
-    </div>
+
+    <button class="edit-button" (click)="editProfile()">
+      <i class="fas fa-edit"></i> Editar Información
+    </button>
   </div>
-  <button class="edit-button" (click)="editProfile()">Editar Información</button>
-</div>
 
-<div *ngIf="!usuarioActual" class="loading">
-  Cargando...
+  <div *ngIf="!usuarioActual" class="loading">
+    <i class="fas fa-spinner fa-spin"></i> Cargando...
+  </div>
 </div>

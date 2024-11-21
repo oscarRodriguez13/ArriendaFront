@@ -104,6 +104,11 @@ export class PagarComponent implements OnInit {
 
   
   enviarReseniaPropiedad(): void {
+    if (this.calificacionPropiedad > 5) {
+      alert("La calificación para la propiedad no puede ser mayor a 10.");
+      return;
+    }
+
     if (this.alquiler) {
       const reseniaPropiedad: Resenia = {
         id: 0,
@@ -130,6 +135,11 @@ export class PagarComponent implements OnInit {
 
 
   enviarReseniaPropietario(): void {
+    if (this.calificacionPropietario > 5) {
+      alert("La calificación para el propietario no puede ser mayor a 10.");
+      return;
+    }
+
     if (this.alquiler?.usuarioAsignado?.id && this.alquiler?.propiedad?.propietario?.id) {
       const reseniaPropietario: Resenia = {
         id: 0,

@@ -1,31 +1,35 @@
-
-
 <div class="detalles-alquiler-container">
   <div class="header">
     <h1 class="titulo-detalles">Detalles del Alquiler</h1>
-    <button *ngIf="mostrarBotonPagar()"
-        mat-button class="agregar-propiedad-btn"
-        [routerLink]="['/pagar', alquiler?.id]">
-  Pagar
-</button>
+    <button *ngIf="mostrarBotonPagar()" mat-button class="pagar-btn" [routerLink]="['/pagar', alquiler?.id]">
+      Pagar
+    </button>
   </div>
 
-  <div *ngIf="alquiler; else noDetalles">
+  <div *ngIf="alquiler; else noDetalles" class="contenido-dividido">
     <div class="detalle-card">
-      <p><strong>Propiedad:</strong> {{ alquiler.propiedad.nombre }}</p>
-      <p><strong>Valor Alquiler por noche:</strong> {{ alquiler.propiedad.valorNoche }}</p>
-      <p><strong>Ciudad:</strong> {{ alquiler.propiedad.ciudad }}</p>
-      <p><strong>Área:</strong> {{ alquiler.propiedad.area }} m²</p>
-      <p><strong>Inquilino:</strong> {{ alquiler.usuarioAsignado.nombre }} {{ alquiler.usuarioAsignado.apellido }}</p>
-      <p><strong>Fecha Inicio:</strong> {{ alquiler.fechaInicio | date }}</p>
-      <p><strong>Fecha Fin:</strong> {{ alquiler.fechaFin | date }}</p>
-      <p><strong>Estado:</strong> {{ alquiler.estado }}</p>
-      <p><strong>Comentarios:</strong> {{ alquiler.comentarios || 'No hay comentarios adicionales' }}</p>
+      <h3>Información de la Propiedad</h3>
+      <p><i class="fas fa-home"></i> <strong>Propiedad:</strong> {{ alquiler.propiedad.nombre }}</p>
+      <p><i class="fas fa-dollar-sign"></i> <strong>Valor Alquiler por noche:</strong> ${{ alquiler.propiedad.valorNoche }}</p>
+      <p><i class="fas fa-map-marker-alt"></i> <strong>Ciudad:</strong> {{ alquiler.propiedad.ciudad }}</p>
+      <p><i class="fas fa-ruler-combined"></i> <strong>Área:</strong> {{ alquiler.propiedad.area }} m²</p>
+
+      <h3>Información del Inquilino</h3>
+      <p><i class="fas fa-user"></i> <strong>Inquilino:</strong> {{ alquiler.usuarioAsignado.nombre }} {{ alquiler.usuarioAsignado.apellido }}</p>
+
+      <h3>Fechas del Alquiler</h3>
+      <p><i class="fas fa-calendar-day"></i> <strong>Fecha Inicio:</strong> {{ alquiler.fechaInicio | date }}</p>
+      <p><i class="fas fa-calendar-check"></i> <strong>Fecha Fin:</strong> {{ alquiler.fechaFin | date }}</p>
+
+      <h3>Estado</h3>
+      <p><i class="fas fa-info-circle"></i> <strong>Estado:</strong> {{ alquiler.estado }}</p>
+
+      <h3>Comentarios</h3>
+      <p><i class="fas fa-comment-dots"></i> {{ alquiler.comentarios || 'No hay comentarios adicionales' }}</p>
     </div>
   </div>
 
   <ng-template #noDetalles>
-    <p>{{ mensaje }}</p>
+    <p class="mensaje">{{ mensaje }}</p>
   </ng-template>
 </div>
-

@@ -1,97 +1,174 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f7f8fa; /* Fondo neutro */
+}
+
+.contenedor-principal {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .titulo-propiedades {
-  text-align: left;
-  font-size: 2.2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  padding: 10px 20px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
 }
 
 .agregar-propiedad-btn {
-  background-color: #46c942;
+  background-color: #4CAF50;
   color: white;
+  padding: 12px 20px;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-right: 20px;
-
 }
 
-.propiedades {
+.agregar-propiedad-btn:hover {
+  background-color: #45a049;
+}
+
+.resultados {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   gap: 20px;
 }
 
 .tarjeta {
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  position: relative;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative; /* Necesario para posicionar los botones a la derecha */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%; /* Ocupa todo el ancho */
 }
 
-.tarjeta h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta mat-card-header {
+  background-color: #2D572C;
+  color: white;
+  padding: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.tarjeta mat-card-content {
+  padding: 16px;
 }
 
 .tarjeta p {
   margin: 5px 0;
-  color: #333;
+  color: #555;
 }
 
-.editar-btn {
-  margin-left: auto;
-  background-color: #46c942;
+.iconos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.iconos span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.iconos i {
+  font-size: 1.2rem;
+  color: #46c942;
+}
+
+
+.tarjeta {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative; /* Necesario para posicionar los botones a la derecha */
+  width: 100%; /* Ocupa todo el ancho */
+}
+
+.mat-card-actions {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.resenas-btn {
+  background-color: #4CAF50;
   color: white;
-  border: none;
-  border-radius: 5px;
+  padding: 8px 16px;
   font-size: 1rem;
-  font-weight: 500;
+  border: none; /* Elimina cualquier borde negro */
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-right: 20px;
-  padding: 10px 20px;
+}
+
+.resenas-btn:hover {
+  background-color: #45a049;
+}
+
+.acciones-derecha {
+  position: absolute;
+  bottom: 20px; /* Ubica los botones en la parte inferior */
+  right: 20px; /* Alinea los botones al lado derecho */
+  display: flex;
+  gap: 10px; /* Espaciado entre botones */
+}
+
+.editar-btn,
+.desactivar-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: auto; /* Ajusta el ancho según el contenido */
 }
 
 .desactivar-btn {
   background-color: #ff4d4d;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  padding: 10px 20px;
 }
 
-.resenas-btn{
-  background-color: #46c942;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-right: 20px;
-  padding: 10px 20px;
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
+.editar-btn:hover {
+  background-color: #45a049;
 }
+
+.desactivar-btn:hover {
+  background-color: #e53935;
+}
+
+.no-resultados {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  margin-top: 20px;
+}
+

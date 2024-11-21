@@ -1,70 +1,138 @@
 html, body {
-    height: 100%; 
-    margin: 0;
-    padding: 0;
-  }
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f7f8fa;
+}
 
 .contenedor-principal {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; 
-  }
+  min-height: 100vh;
+}
 
 .solicitudes-container {
-    flex: 1;
-    margin: 20px;
-  }
-  
-  .titulo-solicitudes {
-    text-align: center;
-    font-size: 2.2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .resultados {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .tarjeta {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    max-width: max-content;
-    position: relative;
-  }
-  
-  .card-footer {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
-  }
-  
-  .aplicar-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .aplicar-btn:hover {
-    background-color: #4CAF49;
-  }
-  
-  .titulo-solicitudes {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .tarjeta p {
-    margin: 5px 0;
-    color: #333;
-  }
-  
+  flex: 1;
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+.titulo-solicitudes {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.resultados {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tarjeta {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  padding: 20px;
+  position: relative;
+}
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.tarjeta mat-card-header {
+  background-color: #2D572C;
+  color: white;
+  padding: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.tarjeta mat-card-content {
+  padding: 16px;
+}
+
+/* Estado destacado */
+.estado-solicitud {
+  position: absolute;
+  bottom: 10px;
+  left: 20px; /* Parte inferior izquierda */
+  background-color: #ddd;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.estado-solicitud.aprobado {
+  background-color: #46c942; /* Verde para aprobados */
+}
+
+.estado-solicitud.pendiente {
+  background-color: #FFA500; /* Naranja para pendientes */
+}
+
+.estado-solicitud.rechazado {
+  background-color: #F44336; /* Rojo para rechazados */
+}
+
+.estado-solicitud.finalizado {
+  background-color: #2196F3; /* Azul para finalizado */
+}
+
+.detalles-solicitud p {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  color: #555;
+  font-size: 1rem;
+  gap: 10px;
+}
+
+.detalles-solicitud i {
+  font-size: 1.2rem;
+  color: #46c942;
+}
+
+.acciones-tarjeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  position: relative;
+}
+
+.aplicar-btn {
+  margin-left: auto; /* Empuja el botón hacia la derecha */
+
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.aplicar-btn:hover {
+  background-color: #45a049;
+}
+
+.no-solicitudes {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+  margin-top: 20px;
+}

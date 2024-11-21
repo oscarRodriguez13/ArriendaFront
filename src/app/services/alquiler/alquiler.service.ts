@@ -8,7 +8,7 @@ import { Alquiler, EstadoAlquiler } from '../../models/Alquiler';
 })
 export class AlquilerService {
 
-  private baseUrl = 'http://127.0.0.1/api/alquileres';
+  private baseUrl = 'http://127.0.0.1:8082/api/alquileres';
 
   constructor(private http: HttpClient) { }
 

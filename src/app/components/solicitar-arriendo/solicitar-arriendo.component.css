@@ -1,115 +1,146 @@
 .solicitar-arriendo-container {
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 40px); /* Altura total menos los márgenes */
-  }
-  
-  .titulo-solicitud {
-    text-align: center;
-    font-size: 2.2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .contenido-dividido {
-    display: flex;
-    flex: 1;
-    gap: 20px;
-  }
-  
-  .detalles-propiedad {
-    flex: 1;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow-y: auto; /* Habilita el scroll vertical si es necesario */
-    max-height: calc(100vh - 120px); /* Ajusta según sea necesario */
-  }
-  
-  .detalles-propiedad h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-  }
-  
-  .detalles-propiedad p {
-    margin: 10px 0;
-    color: #333;
-  }
-  
-  .formulario-solicitud {
-    flex: 1;
-    /* Aquí puedes agregar estilos para el formulario de solicitud cuando lo implementes */
-  }
-  
-  /* Estilos adicionales */
-  .aplicar-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  
-  .aplicar-btn:hover {
-    background-color: #45a049;
-  }
-  
-  /* Estilos para el mensaje de no propiedad */
-  .no-propiedad-mensaje {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #666;
-    margin-top: 20px;
-  }
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 40px); /* Altura total menos los márgenes */
+}
 
-  /* ... (estilos anteriores) ... */
+.titulo-solicitud {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.contenido-dividido {
+  display: flex;
+  flex: 1;
+  gap: 20px;
+}
+
+.detalles-propiedad {
+  flex: 1;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Habilita el scroll vertical si es necesario */
+  max-height: calc(100vh - 120px); /* Ajusta según sea necesario */
+}
+
+.detalles-propiedad h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #2D572C;
+}
+
+.detalles-propiedad p {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #555;
+}
 
 .formulario-solicitud {
-    flex: 1;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formulario-solicitud h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #2D572C;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.error-mensaje {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.aplicar-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.aplicar-btn:hover {
+  background-color: #45a049;
+}
+
+.no-propiedad-mensaje {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 20px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .contenido-dividido {
+    flex-direction: column;
   }
-  
-  .formulario-solicitud h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+
+  .detalles-propiedad,
+  .formulario-solicitud {
+    max-height: unset;
   }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  .aplicar-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    width: 100%;
-  }
-  
-  .aplicar-btn:hover {
-    background-color: #45a049;
-  }
+}
+
+.detalles-propiedad p {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #555;
+  display: flex; /* Alinea los íconos con el texto */
+  align-items: center; /* Centra verticalmente los iconos */
+  gap: 10px; /* Espaciado entre el icono y el texto */
+}
+
+.detalles-propiedad i {
+  font-size: 1.2rem; /* Tamaño del icono */
+  color: #4CAF50; /* Color de los iconos */
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaciado entre el icono y el texto */
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.form-group i {
+  font-size: 1.2rem; /* Tamaño del icono */
+  color: #4CAF50; /* Color de los iconos */
+}

@@ -1,28 +1,36 @@
 <div class="contenedor-principal">
-
-
   <div class="alquileres-container">
-
     <h1 class="titulo-alquileres">Mis Alquileres</h1>
 
     <div class="alquileres">
-      <mat-card *ngFor="let alquiler of alquileres" class="tarjeta">
+      <mat-card *ngFor="let alquiler of alquileres | ordenarAlquileres" class="tarjeta">
+        <!-- Encabezado -->
         <mat-card-header>
           <mat-card-title><strong>Propiedad:</strong> {{ alquiler.propiedad.nombre }}</mat-card-title>
         </mat-card-header>
+
+        <!-- Contenido Principal -->
         <mat-card-content>
-          <p><strong>Ciudad:</strong> {{ alquiler.propiedad.ciudad }}</p>
-          <p><strong>Área:</strong> {{ alquiler.propiedad.area }} m²</p>
-          <p><strong>Fecha Inicio:</strong> {{ alquiler.fechaInicio | date }}</p>
-          <p><strong>Fecha Fin:</strong> {{ alquiler.fechaFin | date }}</p>
-          <p><strong>Estado:</strong> {{ alquiler.estado }}</p>
+          <div class="detalles-alquiler">
+            <p><i class="fas fa-map-marker-alt"></i> <strong>Ciudad:</strong> {{ alquiler.propiedad.ciudad }}</p>
+            <p><i class="fas fa-ruler-combined"></i> <strong>Área:</strong> {{ alquiler.propiedad.area }} m²</p>
+            <p><i class="fas fa-calendar-day"></i> <strong>Fecha Inicio:</strong> {{ alquiler.fechaInicio | date }}</p>
+            <p><i class="fas fa-calendar-check"></i> <strong>Fecha Fin:</strong> {{ alquiler.fechaFin | date }}</p>
+          </div>
         </mat-card-content>
-        <mat-card-actions>
+
+        <!-- Estado y Acciones -->
+        <mat-card-actions class="acciones-tarjeta">
+          <div class="estado-alquiler" [ngClass]="alquiler.estado.toLowerCase()">
+            <i class="fas fa-info-circle"></i> {{ alquiler.estado }}
+          </div>
           <button mat-button class="editar-btn" (click)="revisarAlquiler(alquiler)">Revisar Alquiler</button>
         </mat-card-actions>
       </mat-card>
-      <div *ngIf="alquileres.length === 0">No tienes alquileres actualmente.</div>
+
+      <div *ngIf="alquileres.length === 0" class="no-alquileres">
+        No tienes alquileres actualmente.
+      </div>
     </div>
   </div>
-
 </div>
