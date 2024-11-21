@@ -3,8 +3,10 @@ kind: Ingress
 metadata:
   name: arrienda-front
   namespace: front
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: public
+  ingressClassName: nginx
   rules:
   - host: arriendatufinca.com
     http:
