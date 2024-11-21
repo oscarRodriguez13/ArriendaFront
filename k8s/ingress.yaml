@@ -1,11 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: arrienda-front-ingress
-  namespace: ingress-nginx
+  name: arrienda-front
+  namespace: front
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
   rules:
   - host: arriendatufinca.com
     http:
