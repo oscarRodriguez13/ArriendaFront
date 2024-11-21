@@ -1,58 +1,86 @@
-form {
+.registro-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 550px;
+  max-width: 500px;
   margin: 40px auto;
-  padding: 20px;
+  padding: 30px;
   background-color: #f9f9f9;
-  border: 1px solid #ccc;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
+}
+
+.registro-form h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #2D572C;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
 }
 
 label {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  gap: 10px;
+  font-size: 1rem;
   font-weight: bold;
-  color: #333;
+  color: #555;
 }
 
-input, select {
-  width: 95%;
-  height: 25px; /* reduced from 35px */
-  padding: 5px; /* reduced from 10px */
-  margin-bottom: 20px;
-  margin-right: 20px;
+input {
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 1rem;
+}
+
+input:focus {
+  border-color: #2D572C;
+  outline: none;
+  box-shadow: 0 0 8px rgba(45, 87, 44, 0.5);
 }
 
 .error {
-  color: #f00;
-  font-size: 12px;
+  color: #f44336;
+  font-size: 0.875rem;
   margin-top: 5px;
 }
 
-button[type="submit"] {
+.registrar-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   width: 100%;
-  height: 40px;
-  background-color: #4CAF50;
-  color: #fff;
-  padding: 10px;
+  padding: 12px 20px;
+  background-color: #2D572C;
+  color: white;
   border: none;
   border-radius: 5px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button[type="submit"]:hover {
-  background-color: #3e8e41;
+.registrar-button:hover {
+  background-color: #276633;
+  transform: translateY(-2px);
 }
 
-button[type="submit"]:disabled {
+.registrar-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.mensaje {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 10px;
+  color: #f44336;
 }

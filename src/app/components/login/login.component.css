@@ -1,61 +1,115 @@
-form {
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: 550px;
+  max-width: 500px;
   margin: 40px auto;
-  padding: 20px;
+  padding: 30px;
   background-color: #f9f9f9;
-  border: 1px solid #ccc;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
+}
+
+.login-form h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #2D572C; /* Color verde oscuro */
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
 }
 
 label {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  gap: 10px;
+  font-size: 1rem;
   font-weight: bold;
-  color: #333;
+  color: #555;
 }
 
-input,
-select {
-  width: 95%;
-  height: 25px; 
-  padding: 5px; 
-  margin-bottom: 20px;
-  margin-right: 20px;
+input {
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 1rem;
+}
+
+input:focus {
+  border-color: #2D572C;
+  outline: none;
+  box-shadow: 0 0 8px rgba(45, 87, 44, 0.5);
 }
 
 .error {
-  color: #f00;
-  font-size: 12px;
+  color: #f44336;
+  font-size: 0.875rem;
   margin-top: 5px;
 }
 
-button[type='submit'],
-.registrar-button {
+.login-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   width: 100%;
-  height: 40px;
-  background-color: #4caf50; 
-  color: #fff; 
-  padding: 10px;
-  border: none; 
-  border-radius: 5px; 
-  cursor: pointer; 
-  transition: background-color 0.3s ease;
+  padding: 12px 20px;
+  background-color: #2D572C; /* Verde oscuro */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button[type='submit']:hover,
-.registrar-button:hover {
-  background-color: #3e8e41; 
+.login-button:hover {
+  background-color: #276633;
+  transform: translateY(-2px);
 }
 
-button[type='submit']:disabled {
-  background-color: #ccc; 
-  cursor: not-allowed; 
+.login-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.registro-prompt {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.registro-prompt button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 15px;
+  background-color: #FFA500; /* Naranja */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.registro-prompt button:hover {
+  background-color: #e69500; /* Naranja más oscuro */
+  transform: translateY(-2px);
+}
+
+.registro-prompt button i {
+  font-size: 1rem;
+}
+
+.mensaje {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 10px;
 }
