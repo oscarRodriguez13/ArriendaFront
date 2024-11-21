@@ -67,7 +67,7 @@ input.ng-invalid.ng-touched {
 .save-button {
   width: 100%;
   padding: 12px;
-  background-color: #007bff;
+  background-color: #46c942;
   color: white;
   border: none;
   border-radius: 8px;
@@ -83,5 +83,5 @@ input.ng-invalid.ng-touched {
 }
 
 .save-button:hover {
-  background-color: #0056b3;
+  background-color: #40b93d;
 }
